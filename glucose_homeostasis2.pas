@@ -46,12 +46,12 @@ const beta_cells_percentage = 1;
       ddelta = -2.4; {-2.4 fitting constant, related to enhanced splanchic (liver and gut) glucose uptake during hyperglycemia}
       C7 = 2.0; {2.0 fitting constant, related to enhanced splanchic (liver and gut) glucose uptake during hyperglycemia}
 
-      insulin_sensitivity = 1.40{1.40; 0.30 voor prediabetic}{1.5}; {gevoeligheid van de insuline receptoren, 1 is gemiddeld}
-      glucose_sensitivity = 1.20{1.20; 0.60 for pre diabetic }{1.10}{1.3}; {gevoeligheid van de glucose receptoren, 1 is gemiddeld}
+      insulin_sensitivity = 1.40{1.40; 0.30 voor prediabetic}{1.5}; {sensitivity of the insulin receptorsn, 1 is average}
+      glucose_sensitivity = 1.20{1.20; 0.60 for pre diabetic }{1.10}{1.3}; {gevoeligheid of the glucose receptors, 1 is average}
 
-      ratio =0.1; {waarde tussen 0 en 1}{verhouding van de detectie van glucose in portaal bloed ten opzichte in van serum bloed}
-      k1 = 0.1; {0.1/min; equilibratieconstante tussen intercellulaire glucose en bloedglucose in muscle and adipose tissue}
-      k2 = 0.1; {0.1/min; equilibratieconstante tussen intercellulaire glucose en bloedglucose in skin}
+      ratio =0.1; {value between 0 en 1}{ratio of the detection of glucose in portal blood compared to in serum blood}
+      k1 = 0.1; {0.1/min; equilibrationconstant between intercellular glucose and bloodglucose in muscle and adipose tissue}
+      k2 = 0.1; {0.1/min; equilibratieconstant between intercellulair glucose and bloedglucose in skin}
       k3 = 0; {0.1/min; glucose ustilisation constant in skin}
 
 function f2(Gluc:real):real;
@@ -72,21 +72,21 @@ implementation
 
               {Gluc = mg glucose}
 
-  function f2(Gluc:real):real;                       {glucose utilisatie door hersenen en zenuwcellen in mg/min}
+  function f2(Gluc:real):real;                       {glucose utilisatie by brain and nerve cells in mg/min}
     begin
-      f2 := Ub*(1-exp(-glucose_sensitivity*Gluc/(C2*Vg)));               {insulin independent glucose utilization by brain and nerve cells, op basis van een fit op experimentele data van Verdonk 1981}
+      f2 := Ub*(1-exp(-glucose_sensitivity*Gluc/(C2*Vg)));               {insulin independent glucose utilization by brain and nerve cells, based on a fit of experimentele data by Verdonk 1981}
     end;
-  function f3(Gluc:real):real;                       {glucose utilisatie door spier en vetcellen, glucose afhankelijke term, in mg/min}
+  function f3(Gluc:real):real;                       {glucose utilisatie by muscle and fat cells, glucose-dependent term, in mg/min}
     begin
-      f3 := glucose_sensitivity*Gluc/(C3*Vg) ;                            {op basis van een fit van experimentele data van Rizza 1981, Verdonk 1981}
+      f3 := glucose_sensitivity*Gluc/(C3*Vg) ;                            {basid on a fit of experimentele data by Rizza 1981, Verdonk 1981}
     end;
-  function f4(Ii:real):real;                      {glucose utilisatie door spier en vetcellen, Insuline afhankelijke term}
+  function f4(Ii:real):real;                      {glucose utilisation by muscle and fat cells, Insulin dependent term}
     begin
-      f4:=U0+ (Um-U0)/(1+exp(-beta*ln((insulin_sensitivity*Ii/C4)*(1/Vi+1/(E*ti)))));   {op basis van het werk van Rizza 1981 en een scheiding in een insuline en glucose afhankleijke term}
+      f4:=U0+ (Um-U0)/(1+exp(-beta*ln((insulin_sensitivity*Ii/C4)*(1/Vi+1/(E*ti)))));   {based on Rizza 1981 and separating insulin and glucose dependent terms}
     end;
   function f5(x3:real):real;
     begin
-      f5:=Rg/(1+exp(alpha*(x3*insulin_sensitivity/Vp-C5)));          {effect van insuline op de hepatische glucose productie op basis van werk Rizza 1981}
+      f5:=Rg/(1+exp(alpha*(x3*insulin_sensitivity/Vp-C5)));          {effect of insulin on the hepatic glucose production based on Rizza 1981}
     end;
   function f6(Gluc,Gin:real):real;
     begin
@@ -113,36 +113,36 @@ implementation
   end;
 
   Procedure insulin_dynamics; {Tolic et al., J. Theor. Biol. (2000)207, 361-375}
-  {input Gin: glucose input in mg/min; gluc: glucose serum kwantiteit in mg; output f1 insuline serum concentratie in mU/min}
+  {input Gin: glucose input in mg/min; gluc: glucose serum quantity in mg; output f1 insuline serum concentratie in mU/min}
   var Ip_increment,Ii_increment,G_increment,x1_increment,x2_increment,x3_increment, f1_Tolic, incretin_factor, gluci_increment, Gluciskin_increment, Gi: real;
     begin
       tpf := 4{4}; { 4 in adjusted model, 6 min, insulin degradation constant in plasma in fasted state}
-      incretin:= 5*(0.02*realGIP+0.05*realGLP1) {1+1.5*(1*GIP/400+1*0.5*GLP1/200)};   {incretine effect op de afbraak van insuline}
+      incretin:= 5*(0.02*realGIP+0.05*realGLP1) {1+1.5*(1*GIP/400+1*0.5*GLP1/200)};   {incretine effect on insulin degradation}
       incretin_factor := 1 + incretin;
-      tp := tpf*(1+0.5*incretin/(1+incretin));    {verandering van de halfwaardetijd van de afbraak van insuline}
+      tp := tpf*(1+0.5*incretin/(1+incretin));    {change in half lifetime of insulin degradation by incretins}
 
       Gin := G0in+G1in+G2in;
       Gluc := Gluc0 + Gluc1 + Gluc2;
 
-      {f1 volgens Pederson}
-      {G:= 0.1*glucose_sensitivity*(Gluc/Vg{+Gin/1}){(Vp+Vi)}} ;  {omrekening!!!!???? Gluc is in mg, G is hier in mg/dl (namelijk 0.1 * concentratie mg/l}  {aleen nodig voor Pederson}
-      {calc_f1_Pederson;} {f1 berekend volgens Pedersen et al 2008 voor beta cellen; een subcellulair model voor insuline productie uitgevoerd, levert f1}
+      {f1 according to Pederson}
+      {G:= 0.1*glucose_sensitivity*(Gluc/Vg{+Gin/1}){(Vp+Vi)}} ;  {conversion!!!!???? Gluc is in mg, G is here in mg/dl (to be precise: 0.1 * concentration mg/l}  {only requiredfor Pederson calculation}
+      {calc_f1_Pederson;} {f1 calculated according to Pedersen et al 2008 for beta cells; a subcellular model voor insuline production delivers f1}
       {f1:=incretin_factor*f1; }
-      {einde f1 volgens Pederson}
-      {oorspronkelijk model voor insuline productie van Tolic 2000}
+      {end f1 accroding to Pederson}
+      {original model for insuline production according to Tolic 2000}
       f1_Tolic := incretin_factor*Rm/(1+exp((C1-glucose_sensitivity*(Gluc/Vg+ratio*(Gin/0.57{-Gluc/Vg})))/a1));   {for the fed state: Gin is in mg/min and the glucose is desolved in volume/time  = about 9.5 ml/s = 570 ml/min : At rest, blood flow through the mesenteric artery was 6.3 ± 2.6 ml/sec and 9.5 ± 2.1 ml/sec in the carotid artery. After the test meal, mesenteric artery blood flow increased significantly (p < 0.0001) and reached maximal hyperemia (20.3 ± 7.4 ml/sec) after 45 minutes. Kurt Jäger, M.D. et al, Measurement of mesenteric blood flow by duplex scanning Journal of Vascular Surgery, 1986, Pages 462-469}
-      {einde f1 volgens Tolic}
+      {end f1 according to Tolic}
 
       f1:= {f1_Pederson}f1_Tolic;
 
-      Ip_increment := f1 {in milliunits/min}-E*(Ip/Vp-Ii/Vi)-Ip/tp; {increment in plasma insuline, met transfer (E)van plasma naar interstitionele volumina en afbraak (tijdschaal tp)}
+      Ip_increment := f1 {in milliunits/min}-E*(Ip/Vp-Ii/Vi)-Ip/tp; {increment in plasma insulin, with transfer (E) of plasma to interstitional volumes en breakdown (timescale tp)}
       Ii_increment := E*(Ip/Vp-Ii/Vi)-Ii/ti;           {increment in interstitiele insuline}
       {if Gin>0 then} {doet niets}
          begin
-           gluci_increment := k1*Vi*(Gluc/Vg-gluci/Vi)-glucutili;  {dynamic van intercellulaire glucose in muscle and adipose tissue}
-           gluciskin_increment := k2*Vs*(Gluc/Vg-gluciskin/Vs)- k3*gluciskin; {dynamic van intercellulaire glucose in skin}
-           {Gin is mg glucose/min}{dynamic van intercellulaire glucose}
-           {F2,F3,F4 en F7 hebben betrekking op glucose verwijdering uit het bloed, waarin ook tracerglucose zit, F5 en F6 op de endogeen geprodiuceerde glucose, waarin nog weinig tracer materiaal zit}
+           gluci_increment := k1*Vi*(Gluc/Vg-gluci/Vi)-glucutili;  {dynamic of  intercellulaire glucose in muscle and adipose tissue}
+           gluciskin_increment := k2*Vs*(Gluc/Vg-gluciskin/Vs)- k3*gluciskin; {dynamics of intercellular glucose in skin}
+           {Gin in mg glucose/min}{dynamic of intercellular glucose}
+           {F2,F3,F4 en F7 relate to glucose removal from blood, also including tracerglucose, F5 and F6 on endogeneously produced glucose with assuned very low content of tracer glucose}
            Gi := Gluc ;
 
            endoglucprod := f5(x3)*f6(Gi, Gin);{Gin is mg glucose/min}
@@ -153,14 +153,14 @@ implementation
            G2_increment := G2in-(Gluc2/Gluc)*glucutili;
            G_increment:= G0_increment+G1_increment+G2_increment;
          end;
-      x1_increment:= 3*(Ip-x1)/td1;               {x, x2, x3 beschrijven samen een derde orde afhanelijkheid in de tijd met tijdschaal td, op grond van Prager 1986}
+      x1_increment:= 3*(Ip-x1)/td1;               {x, x2, x3 together describe a third order dependency of time with tijdschale td, based on Prager 1986}
       x2_increment:= 3*(x1-x2)/td2;
       x3_increment:= 3*(x2-x3)/td3;
 
       Ip:= Ip +Ip_increment*dt;
       Ii:= Ii +Ii_increment*dt;
 
-      Gluc0:= Gluc0+ G0_increment*dt;        {eenheid Gluc0 is mg glucose}
+      Gluc0:= Gluc0+ G0_increment*dt;        {units Gluc0 is mg glucose}
       Gluc1:= Gluc1+ G1_increment*dt;
       Gluc2:= Gluc2+ G2_increment*dt;
       Gluc := Gluc0+Gluc1+Gluc2;

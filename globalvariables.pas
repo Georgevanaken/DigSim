@@ -11,7 +11,7 @@ type
    locationcomposition = array[1..16,1..110] of real;
    solidslocationcomposition = array[0..99,1..16,1..1100] of real;
    solidsparameter = array[0..99,1..16] of real;
-   MMC_timer = array[0..4] of real; {geeft de duur aan van de verschillende MMC statussen}
+   MMC_timer = array[0..4] of real; {describes the duration of the different MMC statussen}
    segment = array [1..16] of real;
    component = array[1..110] of real;
 
@@ -59,7 +59,7 @@ var     liquid, liquidnext, liquiddish, liquiddishnext, compound, compounddish, 
         MMC_time : MMC_timer;
         YY,MM,DD, YYE, MME, DDE: word;
         out : text;
-        G, Gluc, Fruc, f1:real;   {Gluc, Fruc = amount of glucose, Fructose in mg in plasma and intercellular space}{G = concentratie van glucose in mg/dl}
+        G, Gluc, Fruc, f1:real;   {Gluc, Fruc = amount of glucose, Fructose in mg in plasma and intercellular space}{G = concentration of glucose in mg/dl}
             M, MAX:real;
         govern: string[30];governnumber, comp: integer;
         concentration_compound_fundus, compound_fundus : component;

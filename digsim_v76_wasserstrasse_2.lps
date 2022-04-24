@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units Count="23">
+      <Unit0>
+        <Filename Value="digsim_v76_wasserstrasse_2.pas"/>
+        <IsPartOfProject Value="True"/>
+        <TopLine Value="10"/>
+        <CursorPos X="10" Y="1296"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="gastric_acid_secretion.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="8"/>
+        <TopLine Value="5"/>
+        <CursorPos X="19" Y="20"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="globalvariables.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="25"/>
+        <CursorPos X="129" Y="23"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="calc_mucin_hydrogen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="calc_Mucin_hydrogen"/>
+        <EditorIndex Value="16"/>
+        <TopLine Value="6"/>
+        <CursorPos X="62" Y="30"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="calc_casein_hydrogen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="calc_Casein_hydrogen"/>
+        <EditorIndex Value="14"/>
+        <TopLine Value="4"/>
+        <CursorPos X="71" Y="17"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="calc_bsa_hydrogen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="calc_BSA_hydrogen"/>
+        <EditorIndex Value="13"/>
+        <TopLine Value="5"/>
+        <CursorPos X="122" Y="7"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="calc_glg_hydrogen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="calc_GLG_hydrogen"/>
+        <CursorPos X="91" Y="8"/>
+        <UsageCount Value="200"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="liver_clearance.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Liver_clearance"/>
+        <EditorIndex Value="10"/>
+        <CursorPos X="67" Y="22"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="calc_protein_hydrogen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="calc_Protein_hydrogen"/>
+        <EditorIndex Value="17"/>
+        <TopLine Value="40"/>
+        <CursorPos X="110" Y="50"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="brush_border_enzymes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Brush_border_enzymes"/>
+        <EditorIndex Value="15"/>
+        <CursorPos X="35" Y="46"/>
+        <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="gastic_motility.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Gastric_motility"/>
+        <TopLine Value="154"/>
+        <CursorPos X="43" Y="39"/>
+        <UsageCount Value="232"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="compartment_properties.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Compartment_properties"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="60"/>
+        <CursorPos X="111" Y="77"/>
+        <UsageCount Value="231"/>
+        <Loaded Value="True"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="hb_glycosylation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Hb_glycosylation"/>
+        <EditorIndex Value="1"/>
+        <CursorPos X="116" Y="17"/>
+        <UsageCount Value="206"/>
+        <Loaded Value="True"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="mmc.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MMC"/>
+        <EditorIndex Value="19"/>
+        <TopLine Value="12"/>
+        <CursorPos X="113" Y="5"/>
+        <UsageCount Value="235"/>
+        <Loaded Value="True"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="glucose_homeostasis.pas"/>
+        <UnitName Value="Glucose_homeostasis"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="139"/>
+        <CursorPos Y="189"/>
+        <UsageCount Value="106"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="diet_from_file.pas"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="172"/>
+        <CursorPos Y="43"/>
+        <UsageCount Value="100"/>
+        <Loaded Value="True"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="subcellularinsulin_pederson.pas"/>
+        <UnitName Value="SubcellularInsulin_Pederson"/>
+        <EditorIndex Value="9"/>
+        <TopLine Value="77"/>
+        <CursorPos Y="75"/>
+        <UsageCount Value="100"/>
+        <Loaded Value="True"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="model_parameter_invoer.pas"/>
+        <UnitName Value="Model_Parameter_Invoer"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="255"/>
+        <CursorPos X="105" Y="230"/>
+        <UsageCount Value="100"/>
+        <Loaded Value="True"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="calc_blg_hydrogen.pas"/>
+        <UnitName Value="calc_BLG_hydrogen"/>
+        <EditorIndex Value="18"/>
+        <TopLine Value="5"/>
+        <CursorPos X="3" Y="15"/>
+        <UsageCount Value="100"/>
+        <Loaded Value="True"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="gastric_motility.pas"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="389"/>
+        <CursorPos X="15" Y="274"/>
+        <UsageCount Value="126"/>
+        <Loaded Value="True"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="glucose_homeostasis2.pas"/>
+        <UnitName Value="Glucose_homeostasis2"/>
+        <EditorIndex Value="7"/>
+        <CursorPos X="19" Y="120"/>
+        <UsageCount Value="107"/>
+        <Loaded Value="True"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="..\versie August 2017\liver_clearance.pas"/>
+        <UnitName Value="Liver_clearance"/>
+        <EditorIndex Value="11"/>
+        <TopLine Value="10"/>
+        <UsageCount Value="100"/>
+        <Loaded Value="True"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="..\..\digestie simulatie\Bolus simulatie\brush_border_enzymes.pas"/>
+        <UnitName Value="Brush_border_enzymes"/>
+        <EditorIndex Value="12"/>
+        <TopLine Value="18"/>
+        <UsageCount Value="100"/>
+        <Loaded Value="True"/>
+      </Unit22>
+    </Units>
+    <JumpHistory Count="12" HistoryIndex="11">
+      <Position1>
+        <Filename Value="compartment_properties.pas"/>
+        <Caret Line="74" Column="22" TopLine="60"/>
+      </Position1>
+      <Position2>
+        <Filename Value="globalvariables.pas"/>
+        <Caret Line="65" Column="50" TopLine="40"/>
+      </Position2>
+      <Position3>
+        <Filename Value="gastric_motility.pas"/>
+        <Caret Line="185" Column="120" TopLine="176"/>
+      </Position3>
+      <Position4>
+        <Filename Value="gastric_motility.pas"/>
+        <Caret Line="177" Column="116" TopLine="176"/>
+      </Position4>
+      <Position5>
+        <Filename Value="gastric_motility.pas"/>
+        <Caret Line="198" Column="22" TopLine="176"/>
+      </Position5>
+      <Position6>
+        <Filename Value="gastric_motility.pas"/>
+        <Caret Line="133" Column="16" TopLine="119"/>
+      </Position6>
+      <Position7>
+        <Filename Value="gastric_motility.pas"/>
+        <Caret Line="172" Column="62" TopLine="154"/>
+      </Position7>
+      <Position8>
+        <Filename Value="gastric_motility.pas"/>
+        <Caret Line="184" Column="52" TopLine="174"/>
+      </Position8>
+      <Position9>
+        <Filename Value="gastric_motility.pas"/>
+        <Caret Line="248" Column="160" TopLine="237"/>
+      </Position9>
+      <Position10>
+        <Filename Value="globalvariables.pas"/>
+        <Caret Line="65" Column="55" TopLine="10"/>
+      </Position10>
+      <Position11>
+        <Filename Value="gastric_motility.pas"/>
+        <Caret Line="257" Column="113" TopLine="242"/>
+      </Position11>
+      <Position12>
+        <Filename Value="gastric_motility.pas"/>
+        <Caret Line="51" Column="10" TopLine="40"/>
+      </Position12>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode="default"/>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <Watches>
+      <Item>
+        <Expression Value="Read(DataFile, j)"/>
+      </Item>
+      <Item RepeatCount="10000">
+        <Expression Value="rateGLP1production[7]"/>
+      </Item>
+    </Watches>
+  </Debugging>
+</CONFIG>

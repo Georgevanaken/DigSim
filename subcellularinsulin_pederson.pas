@@ -35,8 +35,8 @@ const  m_secretion = 0.62; {1/min}
        KmM = 250{185}; {milligram/dl}
        G50 = 150{150}; {mg/dl glucose}
        tau = 0.5{30}; {min}
-       imax =500; {aantal klassen beta cellen}
-       f1min = 0.01; {rekentechnische minimale insuline productie, lager geeft analytische problemen}
+       imax =500; {number of classes of beta cells}
+       f1min = 0.01; {calculational minimal insulin production, lower values analytical problematic}
 
 function sigmoid(BASIS,MAX,POWER,x,xhalf:real):real;
 begin
@@ -52,29 +52,29 @@ Procedure Betacelverdeling;
     for i := 1 to imax do
         begin
              intermediate[i] := 1*dphi[i];
-             RRP[i] := {1.09}1.62*dphi[i];   {microgram insuline totaal in RRP}
+             RRP[i] := {1.09}1.62*dphi[i];   {micrograms insulin total in RRP}
              Fused[i] := 0;
         end;
   end;
 
 
-procedure calc_f1_Pederson;      {insuline productie op basis van Pedersen 2008, G in mg/dl}
+procedure calc_f1_Pederson;      {insulin production based on Pedersen 2008, G in mg/dl}
 var total, mobilization,M_increment: real;
     i: integer;
 begin
   total := 0;
-  if (minutes = starttime) then {initialisatie van M; G moet hier op een initiele waarde gezet worden}
+  if (minutes = starttime) then {initialisation of M; here G must be set on an initial value}
     begin
-    G := 40; {initiele waarde van G in mg/dl}
+    G := 40; {initial value of G in mg/dl}
     M := M0+c*exp(nM*LN(G))/(exp(nM*LN(KmM))+exp(nM*LN(G)))
     end
   else
 
     begin
 
-  mobilization:= M0+c*exp(nM*LN(G))/(exp(nM*LN(KmM))+exp(nM*LN(G)));    {de rol van glucose (in mg/dl) hierin is dat het via de ATP/ADP balans transport reguleerd;
-    let wel: het gaat daarbij om intracellulaire glucose dit door het GLUT2 kanaal de cel is binnengekomen}
-    mobilization:= mobilization{*incretin}; {intracellulair effect van incretines}
+  mobilization:= M0+c*exp(nM*LN(G))/(exp(nM*LN(KmM))+exp(nM*LN(G)));    {the role of glucose (in mg/dl) in this is that it regulates the ATP/ADP balans transport;
+    take note: this is about the intracellular glucose that has entered the cel through the GLUT2 transporter}
+    mobilization:= mobilization{*incretin}; {intracellular effect of incretins}
   M_increment:= (mobilization-M)/tau;
   M:= M+M_increment*dt;
     end;
@@ -82,7 +82,7 @@ begin
       begin
       Intermediate_increment[i]:= M*dphi[i] -(r+Pplus)*Intermediate[i]+Pmin*RRP[i];
       RRP_increment[i]:= Pplus*Intermediate[i]-Pmin*RRP[i];
-      if (2*i<imax*G/G50 ) then          {G in mg/dl; transitie bij i = 0.5 imax }
+      if (2*i<imax*G/G50 ) then          {G in mg/dl; transition at i = 0.5 imax }
          begin
          Intermediate_increment[i]:= Intermediate_increment[i]+k*Fused[i];
          RRP_increment[i] := RRP_increment[i]-fplus*RRP[i];
@@ -92,8 +92,8 @@ begin
          end;
       end;
 
-   f1_Pederson := total/0.0387 {f1 hier gecorrigeerd van microgram/min naar milliUnits/min};
-   f1_Pederson := f1_Pederson; {callibratiefactor, te optimaliseren}
+   f1_Pederson := total/0.0387 {f1 translated from microgram/min to milliUnits/min};
+   f1_Pederson := f1_Pederson; {callibrationfactor, to be optimalized}
    if f1_Pederson < f1min then f1_Pederson := f1min;
 
 

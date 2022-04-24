@@ -10,24 +10,24 @@ uses
 procedure volumina;
 
 implementation
-var dishnumber:integer;
+var dishnumber:integer;               {dishnumer relates to the dishes or glasses (currently 5)from which the meal can be eaten}
 procedure volumina;         {this procedure calculates the volumes of each compartment}
 begin
  for dishnumber := 1 to 5 do
  begin
-       volumedish[dishnumber] := 1E-10;  {om delen door 0 in de concentratie berekeningen te voorkomen}
+       volumedish[dishnumber] := 1E-10;  {to avoid division by 0 in the calculation of concentrations}
        for j:= 1 to comp do
         begin
         volumedish[dishnumber] := volumedish[dishnumber] + liquiddish[dishnumber,j]/density[j];
         end;
        for compoundnumber:= 1 to number_of_compounds do
         begin
-        volumedish[dishnumber] := volumedish[dishnumber] + compounddish[dishnumber,compoundnumber]/1;  {dichtheid compounds nog niet ingevoerd}
+        volumedish[dishnumber] := volumedish[dishnumber] + compounddish[dishnumber,compoundnumber]/1;  {density compounds nog yet introduced (currently set to 1 g/ml)}
         end;
 
       if Volumedish[dishnumber]>1E-20 then
           begin
-            for j:= 1 to comp do concentration_dish[dishnumber,j]:= liquiddish[dishnumber,j]/volumedish[dishnumber];    {alleen de opgeloste delen}
+            for j:= 1 to comp do concentration_dish[dishnumber,j]:= liquiddish[dishnumber,j]/volumedish[dishnumber];    {only dissolved parts}
             for compoundnumber := 1 to number_of_compounds do concentration_compound_dish[dishnumber,compoundnumber]:= compounddish[dishnumber,compoundnumber]/volumedish[dishnumber];
           end
         else
@@ -43,7 +43,7 @@ begin
 
  for i:= 2 to 16 do
   begin
-       volume[i] := 1E-5{10};  {om delen door 0 in de concentratie berekeningen te voorkomen}
+       volume[i] := 1E-5{10};  {to avoid division by 0 in the calculation of concentrations}
        for j:= 1 to comp do
         begin
         volume[i] := volume[i] + liquid[i,j]/density[j];
@@ -56,7 +56,7 @@ begin
 
       if Volume[i]>1E-5{10} then
           begin
-            for j:= 1 to comp do concentration_lumen[i,j]:= liquid[i,j]/volume[i];    {alleen de opgeloste delen} { if concentration_lumen[i,j]>1 then writeln('!'); }
+            for j:= 1 to comp do concentration_lumen[i,j]:= liquid[i,j]/volume[i];    {only dissolved parts} { if concentration_lumen[i,j]>1 then writeln('!'); }
             for compoundnumber := 1 to number_of_compounds do concentration_compound[i,compoundnumber]:= compound[i,compoundnumber]/volume[i];
           end
         else
@@ -70,10 +70,10 @@ begin
   volumetotal:= 0;
   Vfundus:= 0;
   for j:= 1 to comp do Vfundus := Vfundus + fundus[j]/density[j];
-  for compoundnumber:= 1 to number_of_compounds do Vfundus := Vfundus + compoundfundus[compoundnumber]/1;  {dichtheid compounds nog niet ingevoerd}
+  for compoundnumber:= 1 to number_of_compounds do Vfundus := Vfundus + compoundfundus[compoundnumber]/1;  {density compounds nog yet introduced (currently set to 1 g/ml)}
   if Vfundus>1E-5{10} then
           begin
-            for j:= 1 to comp do concentration_fundus[j]:= fundus[j]/Vfundus;    {alleen de opgeloste delen}
+            for j:= 1 to comp do concentration_fundus[j]:= fundus[j]/Vfundus;    {only dissolved parts}
             for compoundnumber := 1 to number_of_compounds do concentration_compound_fundus[compoundnumber]:= compound_fundus[compoundnumber]/Vfundus;
           end
         else
