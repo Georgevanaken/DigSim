@@ -1171,7 +1171,7 @@ end;
 begin
  clrscr;
  writeln('DIGESTION and ABSORPTION simulation program');
- writeln('version 57, December 9, 2019');
+ writeln('version 76_wasserstrasse _3, September 23, 2022');
  writeln('George van Aken, www.insightfoodinside.com, info@insightfoodinside.com');
  YYE:= 2022; MME := 12; DDE := 31;   {einddatum}
  DecodeDate(Date,YY,MM,DD);
@@ -1181,6 +1181,7 @@ begin
  if (YY=YYE) and (MM>MME) then Stop := 1 Else
  if (MM=MME) and (DD>DDE) then Stop := 1;
 
+ Stop := 0 {abort end date}
  If Stop = 1 then
     begin
         writeln('expired, renew subscription');
