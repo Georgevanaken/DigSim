@@ -16,7 +16,7 @@
       <Unit1>
         <Filename Value="gastric_acid_secretion.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="8"/>
         <TopLine Value="5"/>
         <CursorPos X="19" Y="20"/>
         <UsageCount Value="200"/>
@@ -25,7 +25,7 @@
       <Unit2>
         <Filename Value="globalvariables.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="6"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="25"/>
         <CursorPos X="129" Y="23"/>
         <UsageCount Value="200"/>
@@ -35,7 +35,7 @@
         <Filename Value="calc_mucin_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_Mucin_hydrogen"/>
-        <EditorIndex Value="17"/>
+        <EditorIndex Value="14"/>
         <TopLine Value="6"/>
         <CursorPos X="62" Y="30"/>
         <UsageCount Value="200"/>
@@ -45,7 +45,7 @@
         <Filename Value="calc_casein_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_Casein_hydrogen"/>
-        <EditorIndex Value="15"/>
+        <EditorIndex Value="12"/>
         <TopLine Value="4"/>
         <CursorPos X="71" Y="17"/>
         <UsageCount Value="200"/>
@@ -55,7 +55,7 @@
         <Filename Value="calc_bsa_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_BSA_hydrogen"/>
-        <EditorIndex Value="14"/>
+        <EditorIndex Value="11"/>
         <TopLine Value="5"/>
         <CursorPos X="122" Y="7"/>
         <UsageCount Value="200"/>
@@ -72,7 +72,7 @@
         <Filename Value="liver_clearance.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Liver_clearance"/>
-        <EditorIndex Value="11"/>
+        <EditorIndex Value="10"/>
         <CursorPos X="67" Y="22"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -81,7 +81,7 @@
         <Filename Value="calc_protein_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_Protein_hydrogen"/>
-        <EditorIndex Value="18"/>
+        <EditorIndex Value="15"/>
         <TopLine Value="40"/>
         <CursorPos X="110" Y="50"/>
         <UsageCount Value="200"/>
@@ -91,7 +91,7 @@
         <Filename Value="brush_border_enzymes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Brush_border_enzymes"/>
-        <EditorIndex Value="16"/>
+        <EditorIndex Value="13"/>
         <CursorPos X="35" Y="46"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -108,7 +108,7 @@
         <Filename Value="compartment_properties.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Compartment_properties"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="60"/>
         <CursorPos X="111" Y="77"/>
         <UsageCount Value="231"/>
@@ -118,7 +118,7 @@
         <Filename Value="hb_glycosylation.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Hb_glycosylation"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="1"/>
         <CursorPos X="116" Y="17"/>
         <UsageCount Value="206"/>
         <Loaded Value="True"/>
@@ -127,7 +127,7 @@
         <Filename Value="mmc.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="MMC"/>
-        <EditorIndex Value="20"/>
+        <EditorIndex Value="17"/>
         <TopLine Value="12"/>
         <CursorPos X="113" Y="5"/>
         <UsageCount Value="235"/>
@@ -143,7 +143,7 @@
       </Unit14>
       <Unit15>
         <Filename Value="diet_from_file.pas"/>
-        <EditorIndex Value="7"/>
+        <EditorIndex Value="6"/>
         <TopLine Value="93"/>
         <CursorPos Y="42"/>
         <UsageCount Value="100"/>
@@ -152,7 +152,7 @@
       <Unit16>
         <Filename Value="subcellularinsulin_pederson.pas"/>
         <UnitName Value="SubcellularInsulin_Pederson"/>
-        <EditorIndex Value="10"/>
+        <EditorIndex Value="9"/>
         <TopLine Value="77"/>
         <CursorPos Y="75"/>
         <UsageCount Value="100"/>
@@ -161,7 +161,7 @@
       <Unit17>
         <Filename Value="model_parameter_invoer.pas"/>
         <UnitName Value="Model_Parameter_Invoer"/>
-        <EditorIndex Value="5"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="211"/>
         <CursorPos X="105" Y="230"/>
         <UsageCount Value="100"/>
@@ -170,7 +170,7 @@
       <Unit18>
         <Filename Value="calc_blg_hydrogen.pas"/>
         <UnitName Value="calc_BLG_hydrogen"/>
-        <EditorIndex Value="19"/>
+        <EditorIndex Value="16"/>
         <TopLine Value="5"/>
         <CursorPos X="3" Y="15"/>
         <UsageCount Value="100"/>
@@ -178,8 +178,9 @@
       </Unit18>
       <Unit19>
         <Filename Value="gastric_motility.pas"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="344"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="389"/>
         <CursorPos X="15" Y="274"/>
         <UsageCount Value="126"/>
         <Loaded Value="True"/>
@@ -187,7 +188,7 @@
       <Unit20>
         <Filename Value="glucose_homeostasis2.pas"/>
         <UnitName Value="Glucose_homeostasis2"/>
-        <EditorIndex Value="8"/>
+        <EditorIndex Value="7"/>
         <CursorPos X="19" Y="120"/>
         <UsageCount Value="107"/>
         <Loaded Value="True"/>
@@ -195,25 +196,21 @@
       <Unit21>
         <Filename Value="..\versie August 2017\liver_clearance.pas"/>
         <UnitName Value="Liver_clearance"/>
-        <EditorIndex Value="12"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="10"/>
         <UsageCount Value="100"/>
-        <Loaded Value="True"/>
       </Unit21>
       <Unit22>
         <Filename Value="..\..\digestie simulatie\Bolus simulatie\brush_border_enzymes.pas"/>
         <UnitName Value="Brush_border_enzymes"/>
-        <EditorIndex Value="13"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <UsageCount Value="100"/>
-        <Loaded Value="True"/>
       </Unit22>
       <Unit23>
         <Filename Value="..\versie oktober 2020-1\digsim_v75.pas"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit23>
     </Units>
     <JumpHistory Count="16" HistoryIndex="15">
