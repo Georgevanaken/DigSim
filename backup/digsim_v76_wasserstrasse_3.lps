@@ -8,7 +8,7 @@
       <Unit0>
         <Filename Value="digsim_v76_wasserstrasse_3.pas"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="1229"/>
+        <TopLine Value="77"/>
         <CursorPos X="175" Y="1245"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -144,8 +144,8 @@
       <Unit15>
         <Filename Value="diet_from_file.pas"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="93"/>
-        <CursorPos Y="42"/>
+        <TopLine Value="29"/>
+        <CursorPos Y="53"/>
         <UsageCount Value="100"/>
         <Loaded Value="True"/>
       </Unit15>
@@ -178,17 +178,18 @@
       </Unit18>
       <Unit19>
         <Filename Value="gastric_motility.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <CursorPos X="15" Y="274"/>
+        <TopLine Value="358"/>
+        <CursorPos X="13" Y="309"/>
         <UsageCount Value="126"/>
         <Loaded Value="True"/>
       </Unit19>
       <Unit20>
         <Filename Value="glucose_homeostasis2.pas"/>
         <UnitName Value="Glucose_homeostasis2"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="7"/>
-        <CursorPos X="67" Y="8"/>
+        <CursorPos X="65" Y="8"/>
         <UsageCount Value="107"/>
         <Loaded Value="True"/>
       </Unit20>
@@ -212,7 +213,7 @@
         <UsageCount Value="10"/>
       </Unit23>
     </Units>
-    <JumpHistory Count="21" HistoryIndex="20">
+    <JumpHistory Count="25" HistoryIndex="24">
       <Position1>
         <Filename Value="compartment_properties.pas"/>
         <Caret Line="74" Column="22" TopLine="60"/>
@@ -297,6 +298,22 @@
         <Filename Value="digsim_v76_wasserstrasse_3.pas"/>
         <Caret Line="1182" Column="103" TopLine="1164"/>
       </Position21>
+      <Position22>
+        <Filename Value="glucose_homeostasis2.pas"/>
+        <Caret Line="8" Column="65"/>
+      </Position22>
+      <Position23>
+        <Filename Value="diet_from_file.pas"/>
+        <Caret Line="36" Column="78" TopLine="30"/>
+      </Position23>
+      <Position24>
+        <Filename Value="diet_from_file.pas"/>
+        <Caret Line="42" Column="18" TopLine="29"/>
+      </Position24>
+      <Position25>
+        <Filename Value="gastric_motility.pas"/>
+        <Caret Line="274" Column="15"/>
+      </Position25>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

@@ -306,7 +306,7 @@ if 1=1 then    {on-off switch for this redistribution; this is the most basic de
     {solids_corpus and solids_antrum have to be calculated in a separate routine, for examples on the basis of control by acidification}
     {temporary description transfer to solids}
     total_solids_corpus:= 0;
-    if 1 = 0{1} then     {switch}
+    if 1 = 1{1} then     {switch}
     begin
     for j:= 1 to comp do  vloksamenstelling[j]:= 0;
       pHvlokken:= 4.5;

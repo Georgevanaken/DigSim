@@ -39,7 +39,7 @@ var hulp :integer;
  begin
  Assign(DataFile, 'meal' + '.txt');
 
- Reset(DataFile); {'Reset(x)' - means open the file x}
+ Reset(DataFile);{'Reset(x)' - means open the file x}
  for compoundnumber := 0 to 50 do for j := 1 to 110 do
      begin
      compoundcomposition[compoundnumber,j]:=0;
