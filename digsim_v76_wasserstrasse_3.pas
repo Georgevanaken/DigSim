@@ -1170,9 +1170,21 @@ end;
 
 begin
  clrscr;
- writeln('DIGESTION and ABSORPTION simulation program');
+ writeln('DIGESTION and ABSORPTION simulation program (DigSim)');
  writeln('version 76_wasserstrasse _3, September 23, 2022');
  writeln('George van Aken, www.insightfoodinside.com, info@insightfoodinside.com');
+ writeln;
+ writeln('DigSim provides a literature-based simulation of the alimentary system, including food intake, mouth and gastrointestinal physiology and processing, and the response by the body.');
+ writeln('Copyright (C) 2023 George van Aken');
+ writeln;
+ writeln('This program is free software:');
+ writeln('you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, version 3 or any later version.');
+ writeln;
+ writeln('This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  ');
+ writeln('See theGNU Affero General Public License for more details.');
+ writeln;
+ writeln('You should have received a copy of the GNU Affero General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.');
+
  YYE:= 2022; MME := 12; DDE := 31;   {einddatum}
  DecodeDate(Date,YY,MM,DD);
 
@@ -1181,8 +1193,8 @@ begin
  if (YY=YYE) and (MM>MME) then Stop := 1 Else
  if (MM=MME) and (DD>DDE) then Stop := 1;
 
- Stop := 0 {abort end date}
- If Stop = 1 then
+ Stop := 0; {abort end date}
+ {If Stop = 1 then
     begin
         writeln('expired, renew subscription');
         readln;
@@ -1191,7 +1203,7 @@ begin
      begin
        Write (Format ('Today is %d/%d/%d',[dd,mm,yy]));
        Writeln(Format (';  Subscription expires after %d/%d/%d',[DDE,MME,YYE]));
-     end;
+     end; }
 
  if Stop = 0 then
  begin
@@ -1205,7 +1217,7 @@ begin
  initialiseer;
 
  newmealnumber := 0;
- write('time resolution: steps per minute (6 - 600)) = '); readln(substeps); writeln; writeln;     {substeps defines the number of calculational time steps per prefactor minutes; 60 corresponds with a time resolution of 1 second}
+ write('Enter the time resolution for calculation in steps per minute (6 - 600)) = '); readln(substeps); writeln; writeln;     {substeps defines the number of calculational time steps per prefactor minutes; 60 corresponds with a time resolution of 1 second}
  dt := 1/substeps; {time step in minutes}
  prefactor:= 1; {prefactor defines the number of point per minute that is being stored} ; prefactor:= 1/prefactor;
  volumina;
