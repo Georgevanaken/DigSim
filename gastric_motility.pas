@@ -19,7 +19,7 @@ Procedure pressures;
 begin
      {Gastric_tone :=  0.023*(1-Transition)*(Volume[3] + Volume[4])+0.5; }{maagdruk, mbar} {Tack}
      Gastric_Volume := Vfunduscorpus + Volume[4];
-     Gastric_Tone := 3+ 0.0177*(Gastric_Volume {+ total_solids_corpus})*(1-0.5*Transition); {gstric tone in mBar} {Janssen}
+     Gastric_Tone := 3+ 0.0177*(Gastric_Volume + total_solids_corpus)*(1-0.5*Transition); {gastric tone in mBar} {Janssen}
      if Gastric_tone < 3 then Gastric_tone:=3;
      {Gastric compliance = 58 +/- 6 mL/mm Hg (Tack 1998); first detection and discomfort starts at 4.1 +/- 0.5 and 12.1 +/- 0.4 mm Hg, respectively}
      {Janssen 2011: 3mBar + saline: 0.0177 mBar/ml; nutrient solution: 0.00887 mBar/ml}
@@ -267,7 +267,7 @@ if 1=1 then    {on-off switch for this redistribution; this is the most basic de
 
   {end 2a.}
 
-{2b. desription of the redistribution of compounds between corpus en antrum by slow sedimetation or creaming in the liquid medium; this part needs to be updated}
+{2b. description of the redistribution of compounds between corpus en antrum by slow sedimetation or creaming in the liquid medium; this part needs to be updated}
  if 1=1 then    {on-off switch compound redistribution}
   begin
      x := (compounddensity[compoundnumber]-1); {x is ∆ρ; "1" temporarily corresponds to the density of the gastric liquid phase}{for x<0 the compound creams up from 4 to 3}
@@ -302,50 +302,58 @@ if 1=1 then    {on-off switch for this redistribution; this is the most basic de
   {end 3.}
 
 
-  {4. solid parts in lumen of corpus and antrum lumen follow different kinetics; therefore the model describes solids_corpus and solids_antrum}
+  {4. solid parts in lumen of corpus and lumen of antrum follow different kinetics; therefore the model describes solids_corpus and solids_antrum}
     {solids_corpus and solids_antrum have to be calculated in a separate routine, for examples on the basis of control by acidification}
     {temporary description transfer to solids}
-    total_solids_corpus:= 0;
+
     if 1 = 1{1} then     {switch}
     begin
+     ber_alle_pHs;
     for j:= 1 to comp do  vloksamenstelling[j]:= 0;
       pHvlokken:= 4.5;
-      vloksamenstelling[61] := 1;
+      vloksamenstelling[61] := 1;          {vloksamenstelling bepaald welke componenten bij de uitvlokking betrokken zijn; nu caseine}
       vloksamenstelling[62] := 1;
       hulp := vloksamenstelling[61] +vloksamenstelling[62];
-      vloksamenstelling[80] := 1*Ber_hydrogen(pHvlokken,hulp ,vloksamenstelling[55],vloksamenstelling[66],vloksamenstelling[67], vloksamenstelling[4]);vlokkingssnelheid_corpus := 1{0.01}; {deze zal in werkelijkheid varieren met bijvoorbeeld de pH}
-    {4a. corpus solids caseine}
+      vloksamenstelling[80] := 1*Ber_hydrogen(pHvlokken,hulp ,vloksamenstelling[55],vloksamenstelling[66],vloksamenstelling[67], vloksamenstelling[4]);
+    {4a. corpus solids}
       vlokkingssnelheid_corpus := 0;
-      Kineticfactor := 3E3;
-      if ((pH[3] < 5.0) and (pH[3] > 4) and (Volume[3] <>0)) then vlokkingssnelheid_corpus := kineticfactor*EXP(-ABS(pH[3]-pHvlokken));
-      change :=0;
+      Kineticfactor := 3000{3E3};
+      if {((pH[3] < 6) and (pH[3] > 3{3}) and} (Volume[3] <>0){)} then vlokkingssnelheid_corpus := kineticfactor*EXP(-8*ABS(pH[3]-pHvlokken));
+
       for j:= 1 to comp do
         begin
-        change := vlokkingssnelheid_corpus*vloksamenstelling[j]*(liquid[3,j]/Volume[3])*dt;
-        solids_corpus[j] := solids_corpus[j] + change ;
-        liquid[3,j] := liquid[3,j]- change;
+        change := vlokkingssnelheid_corpus*vloksamenstelling[j]*liquid[3,j]*dt;
+        if change > liquid[3,j] then change := liquid[3,j] else
+           begin
+           solids_corpus[j] := solids_corpus[j] + change ;
+           liquid[3,j] := liquid[3,j]- change;
+           end;
         end;
 
       oplossnelheid_vlokken_corpus := 0; {flocks slowly redissolve, for example below the isolectric pH }
-      discost := 0.01;
-      if pH[3] > 5 then oplossnelheid_vlokken_corpus := discost*(EXP(pH[3]-5)-1);
-      If pH[3] < 4 then oplossnelheid_vlokken_corpus := discost*(EXP(4-pH[3])-1);
+      discost := 1;
+      {if pH[3] > 5 then oplossnelheid_vlokken_corpus := discost*(EXP(pH[3]-5)-1);
+      If pH[3] < 4 then oplossnelheid_vlokken_corpus := discost*(EXP(4-pH[3])-1);}
+      hulp:= {EXP(}10*ABS(pH[3]-pHvlokken){-1};
+      oplossnelheid_vlokken_corpus := discost*hulp/(1+hulp);
+
       total_solids_corpus := 0;
       for j:= 1 to comp do total_solids_corpus := total_solids_corpus+ solids_corpus[j];
-      if total_solids_corpus> 0.00001 then bolus_oppervlak := exp(0.666666666666*LN(total_solids_corpus)) else bolus_oppervlak := 1*total_solids_corpus;
+      if total_solids_corpus> 0.00001 then bolus_oppervlak := exp(0.666666666666*LN(total_solids_corpus)) else bolus_oppervlak := 0{1*total_solids_corpus};
       if total_solids_corpus >0 then
         begin
           for j:= 1 to comp do
           begin
-          hulp := oplossnelheid_vlokken_corpus*bolus_oppervlak*vloksamenstelling[j]/total_solids_corpus*dt;
+          hulp := oplossnelheid_vlokken_corpus*bolus_oppervlak*vloksamenstelling[j]*dt/total_solids_corpus;
+          if hulp > solids_corpus[j] then hulp:= solids_corpus[j];
           solids_corpus[j] := solids_corpus[j] - hulp;
-          if solids_corpus[j] <0 then solids_corpus[j] := solids_corpus[j] + hulp else {**************************}
           liquid[3,j] := liquid[3,j]+ hulp;
           end;
         end;
 
 
-
+      if 1 = 0{1} then     {switch}
+      begin
       syneresesnelheid := 0{0.01};    {syneresis of the flocks}
       for j:= 1 to comp do samenstelling_syneresevloeistof[j] := 0;
         samenstelling_syneresevloeistof[1]:= 1;
@@ -354,8 +362,10 @@ if 1=1 then    {on-off switch for this redistribution; this is the most basic de
         solids_corpus[j] := solids_corpus[j] - samenstelling_syneresevloeistof[j]*syneresesnelheid*solids_corpus[j]*dt;
         liquid[3,j] := liquid[3,j]+ samenstelling_syneresevloeistof[j]*syneresesnelheid*solids_corpus[j]*dt;
         end;
-      total_solids_corpus:= 0;
-      for j:= 1 to comp do total_solids_corpus := total_solids_corpus + solids_corpus[j];
+      end;
+
+      solids_in_corpus:= 0;
+      for j:= 1 to comp do solids_in_corpus := solids_in_corpus + solids_corpus[j];
       {end 4a.}
 
   {4b. antrum solids caseine}

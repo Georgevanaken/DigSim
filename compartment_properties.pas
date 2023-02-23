@@ -78,7 +78,7 @@ begin
           end
         else
           begin
-             Volume[j] := 1E-5{20};
+             {Volume[j]}Vfundus:= 1E-5{20};
              for j:= 1 to comp do concentration_fundus[j]:= 0;
              for compoundnumber := 1 to number_of_compounds do concentration_compound_fundus[compoundnumber]:= 0;
           end;

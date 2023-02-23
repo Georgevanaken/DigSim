@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units Count="14">
+      <Unit0>
+        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="gastric_acid_secretion.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="20"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="globalvariables.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UsageCount Value="20"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="calc_mucin_hydrogen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="calc_Mucin_hydrogen"/>
+        <UsageCount Value="20"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="calc_casein_hydrogen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="calc_Casein_hydrogen"/>
+        <UsageCount Value="20"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="calc_bsa_hydrogen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="calc_BSA_hydrogen"/>
+        <UsageCount Value="20"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="calc_glg_hydrogen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="calc_GLG_hydrogen"/>
+        <UsageCount Value="20"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="liver_clearance.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Liver_clearance"/>
+        <UsageCount Value="20"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="calc_protein_hydrogen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="calc_Protein_hydrogen"/>
+        <UsageCount Value="20"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="brush_border_enzymes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Brush_border_enzymes"/>
+        <UsageCount Value="20"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="gastic_motility.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Gastric_motility"/>
+        <UsageCount Value="20"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="compartment_properties.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Compartment_properties"/>
+        <UsageCount Value="20"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="hb_glycosylation.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Hb_glycosylation"/>
+        <UsageCount Value="20"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="mmc.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MMC"/>
+        <UsageCount Value="20"/>
+      </Unit13>
+    </Units>
+    <JumpHistory HistoryIndex="-1"/>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode="default"/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>

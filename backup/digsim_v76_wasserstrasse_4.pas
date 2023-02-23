@@ -1,8 +1,8 @@
-Program digsim_v76_wasserstrasse_3;
+Program digsim_v76_wasserstrasse_4;
 uses crt, sysutils, gastric_acid_secretion, globalvariables, calc_Mucin_hydrogen,
   calc_Casein_hydrogen, calc_BSA_hydrogen, calc_BLG_hydrogen, calc_Protein_hydrogen,
   SubcellularInsulin_Pederson, Liver_clearance,diet_from_file,
-  Brush_border_enzymes, Model_Parameter_Invoer, Gastric_motility,
+  Brush_border_enzymes, Model_Parameter_Invoer, Gastric_motility_3,
   Compartment_properties, Glucose_homeostasis2, Hb_glycosylation, MMC;
 
 
@@ -144,12 +144,12 @@ for i:= 2 to 16 do      {liquid, the amount of liquid and dissolved components i
  end;
 
   liquid[3,1]:= 25; liquid[4,1]:= 10; {the gastric corpus and antrum initially contain an arbitrary small amount of water, to avoid divisions by 0}
-    for j := 1 to comp do begin solids_corpus[j] := 0; solids_antrum[j] := 0; solids_fundus[j] := 0; end; solids_in_fundus:= 0;
+    for j := 1 to comp do begin solids_corpus[j] := 0; solids_antrum[j] := 0; solids_fundus[j] := 0; end; solids_in_fundus:= 0; solids_in_corpus := 0 ; solids_in_antrum:= 0; total_solids_in_stomach := 0;
   for i:= 5 to 15 do liquid[i,50] := 0.01; {basis lipase(component 50) activity in the lumen of small intestinal compartments 5 - 15}
   liquid[6,51]:= 0.1; {initial concentration of bile salts in het second part of the duodenum}
   liquid[6,50]:= 0.012/5; {initial activity of pancreatic lipase in the second part of the duodenum, which is approx. 1/5 of the activated (fed) value; reference S. Bernbäck, L. Bläckberg, O. Hernell, Biochim. Biophys. Acta. 1001, 286 (1989)}
 
-  Initialise_glucose_dynamics;     {here the calcualtional procedure is started to establish the blood serum and insulin concentrations relevant for the start up conditions}
+  Initialise_glucose_dynamics;     {here the calculational procedure is started to establish the blood serum and insulin concentrations relevant for the start up conditions}
 
 
 for j:=1 to comp do
@@ -576,45 +576,52 @@ begin
    {protein digestion} {4 = protein,  61 = casein, 62 = caseinpep, 63 = caseinpan, 64 = caseinpeptides, 65 = small peptides}
    segmentpH := pH[i];
    change := liquid[i,4]*pepsin_susceptibility_protein*pepsin_units(segmentpH,liquid[i,40])*dt/(volume[i]);
-          liquid[i,65] := liquid[i,65] + change; {digestion by pepsin}
+          liquid[i,65] := liquid[i,65] + change; {digestion protein by pepsin into small peptides}
           liquid[i,4] := liquid[i,4] - change;
 
    change := liquid[i,66]*pepsin_susceptibility_protein*pepsin_units(segmentpH,liquid[i,40])*dt/(volume[i]);
-          liquid[i,65] := liquid[i,65] + change; {digestion by pepsin}
+          liquid[i,65] := liquid[i,65] + change; {digestion BSA by pepsin into small peptides}
           liquid[i,66] := liquid[i,66] - change;
 
    change := liquid[i,67]*pepsin_susceptibility_protein*pepsin_units(segmentpH,liquid[i,40])*dt/(volume[i]);
-          liquid[i,65] := liquid[i,65] + change; {digestion by pepsin}
+          liquid[i,65] := liquid[i,65] + change; {digestion BLG by pepsin into small protein peptides}
           liquid[i,67] := liquid[i,67] - change;
 
    change := liquid[i,61]*pepsin_susceptibility_casein*pepsin_units(segmentpH,liquid[i,40])*dt/(volume[i]);
-          liquid[i,62] := liquid[i,62] + change; {digestion by pepsin}
+          if change > liquid [i,61] then change := 0;
+          liquid[i,62] := liquid[i,62] + change; {digestion Casein by pepsin into casein peptides}
           liquid[i,61] := liquid[i,61] - change;
 
    change:= liquid[i,4]*liquid[i,41]*pancreatic_protease_susceptibility_protein*activity_pancreatic_protease*dt/Volume[i];
-            liquid[i,65] := liquid[i,65] + change; {digestion by pancreatic protease}
+            if change > liquid [i,4] then change := 0;
+            liquid[i,65] := liquid[i,65] + change; {digestion protein by pancreatic protease into small peptides}
             liquid[i,4] := liquid[i,4] - change;
 
    change:= liquid[i,66]*liquid[i,41]*pancreatic_protease_susceptibility_protein*activity_pancreatic_protease*dt/Volume[i];
-            liquid[i,65] := liquid[i,65] + change; {digestion by pancreatic protease}
+            if change > liquid [i,66] then change := 0;
+            liquid[i,65] := liquid[i,65] + change; {digestion BSA by pancreatic protease into small protein peptides}
             liquid[i,66] := liquid[i,66] - change;
 
    change:= liquid[i,67]*liquid[i,41]*pancreatic_protease_susceptibility_protein*activity_pancreatic_protease*dt/Volume[i];
-            liquid[i,65] := liquid[i,65] + change; {digestion by pancreatic protease}
+            if change > liquid [i,67] then change := 0;
+            liquid[i,65] := liquid[i,65] + change; {digestion BLG by pancreatic protease into small proteien peptides}
             liquid[i,67] := liquid[i,67] - change;
 
-
-
    change:= liquid[i,61]*liquid[i,41]*pancreatic_protease_susceptibility_casein*activity_pancreatic_protease*dt/Volume[i];
-            liquid[i,63] := liquid[i,63] + change; {digestion by pancreatic protease}
+            if change > liquid [i,61] then change := 0;
+            liquid[i,63] := liquid[i,63] + change; {digestion Casein by pancreatic protease into pancreatic casein digest}
             liquid[i,61] := liquid[i,61] - change;
+
    change := liquid[i,62]*pepsin_susceptibility_casein_fragments*pepsin_units(segmentpH,liquid[i,40])*dt/volume[i];
-          liquid[i,64] := liquid[i,64] + change;
+          if change > liquid [i,62] then change := 0;
+          liquid[i,64] := liquid[i,64] + change;  {digestion Casein pepsic digest by pepsin into casein small peptides}
           liquid[i,62] := liquid[i,62] - change;
    change := liquid[i,63]*liquid[i,41]*pancreatic_protease_susceptibility_casein_fragments*activity_pancreatic_protease*dt/Volume[i];
-          liquid[i,64] := liquid[i,64] + change;
+          if change > liquid [i,63] then change := 0;
+          liquid[i,64] := liquid[i,64] + change;  {digestion Casein pancreatic digest by pancreatic protease into casein small peptides}
           liquid[i,63] := liquid[i,63] - change;
 
+   liquid[i,65] := liquid [i,65] + liquid[i,64];  liquid[i,64] := 0; {all small casein peptides are seen as small protein peptides]};
 
 
    {pharmaceutical degradation}   {currently turned of}

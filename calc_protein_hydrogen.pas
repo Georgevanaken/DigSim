@@ -62,15 +62,15 @@ var hulp1, hulp2, hulp3, hulp4,hulp5,hulp6: real;
 begin
   for i := 2 to 15 do
    begin
-    hulp1 := liquid[i,61]+liquid[i,62]{+liquid[i,63]+liquid[i,64]+liquid[i,65]};
+    hulp1 := liquid[i,61]+liquid[i,62]{+liquid[i,63]+liquid[i,64]+liquid[i,65]}+liquid[i,63]+liquid[i,64]+liquid[i,65];
     pH[i]:=ber_pH(Volume[i],liquid[i,80], hulp1 ,liquid[i,66],liquid[i,55], liquid[i,67], liquid[i,4]);
    end;
-   hulp1 := fundus[61]+fundus[62]{+fundus[63]+fundus[64]+fundus[65]}+solids_fundus[61]+solids_fundus[62]{+solids_fundus[63]+solids_fundus[64]+solids_fundus[65]};
-   hulp2 := fundus[80]+solids_fundus[80];
-   hulp3 := fundus[66]+solids_fundus[66];
-   hulp4 := fundus[55]+solids_fundus[55];
-   hulp5 := fundus[67]+solids_fundus[67];
-   hulp6 := fundus[4]+solids_fundus[4];
+   hulp1 := fundus[61]+fundus[62]+fundus[63]+fundus[64]+fundus[65]{+fundus[63]+fundus[64]+fundus[65]}{+solids_fundus[61]+solids_fundus[62]+solids_fundus[63]+solids_fundus[64]+solids_fundus[65]};
+   hulp2 := fundus[80]{+solids_fundus[80]};
+   hulp3 := fundus[66]{+solids_fundus[66]};
+   hulp4 := fundus[55]{+solids_fundus[55]};
+   hulp5 := fundus[67]{+solids_fundus[67]};
+   hulp6 := fundus[4]{+solids_fundus[4]};
    pHfundus:=ber_pH(Vfundus, hulp2, hulp1 ,hulp3,hulp4, hulp5, hulp6);
    {writeln(pH[1]:10, pH[2]:10);}
 end;

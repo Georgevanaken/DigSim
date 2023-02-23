@@ -2,7 +2,7 @@ Program digsim_v76_wasserstrasse_3;
 uses crt, sysutils, gastric_acid_secretion, globalvariables, calc_Mucin_hydrogen,
   calc_Casein_hydrogen, calc_BSA_hydrogen, calc_BLG_hydrogen, calc_Protein_hydrogen,
   SubcellularInsulin_Pederson, Liver_clearance,diet_from_file,
-  Brush_border_enzymes, Model_Parameter_Invoer, Gastric_motility,
+  Brush_border_enzymes, Model_Parameter_Invoer, gastric_motility_5,
   Compartment_properties, Glucose_homeostasis2, Hb_glycosylation, MMC;
 
 
@@ -576,45 +576,52 @@ begin
    {protein digestion} {4 = protein,  61 = casein, 62 = caseinpep, 63 = caseinpan, 64 = caseinpeptides, 65 = small peptides}
    segmentpH := pH[i];
    change := liquid[i,4]*pepsin_susceptibility_protein*pepsin_units(segmentpH,liquid[i,40])*dt/(volume[i]);
-          liquid[i,65] := liquid[i,65] + change; {digestion by pepsin}
+          liquid[i,65] := liquid[i,65] + change; {digestion protein by pepsin into small peptides}
           liquid[i,4] := liquid[i,4] - change;
 
    change := liquid[i,66]*pepsin_susceptibility_protein*pepsin_units(segmentpH,liquid[i,40])*dt/(volume[i]);
-          liquid[i,65] := liquid[i,65] + change; {digestion by pepsin}
+          liquid[i,65] := liquid[i,65] + change; {digestion BSA by pepsin into small peptides}
           liquid[i,66] := liquid[i,66] - change;
 
    change := liquid[i,67]*pepsin_susceptibility_protein*pepsin_units(segmentpH,liquid[i,40])*dt/(volume[i]);
-          liquid[i,65] := liquid[i,65] + change; {digestion by pepsin}
+          liquid[i,65] := liquid[i,65] + change; {digestion BLG by pepsin into small protein peptides}
           liquid[i,67] := liquid[i,67] - change;
 
    change := liquid[i,61]*pepsin_susceptibility_casein*pepsin_units(segmentpH,liquid[i,40])*dt/(volume[i]);
-          liquid[i,62] := liquid[i,62] + change; {digestion by pepsin}
+          if change > liquid [i,61] then change := 0;
+          liquid[i,62] := liquid[i,62] + change; {digestion Casein by pepsin into casein peptides}
           liquid[i,61] := liquid[i,61] - change;
 
    change:= liquid[i,4]*liquid[i,41]*pancreatic_protease_susceptibility_protein*activity_pancreatic_protease*dt/Volume[i];
-            liquid[i,65] := liquid[i,65] + change; {digestion by pancreatic protease}
+            if change > liquid [i,4] then change := 0;
+            liquid[i,65] := liquid[i,65] + change; {digestion protein by pancreatic protease into small peptides}
             liquid[i,4] := liquid[i,4] - change;
 
    change:= liquid[i,66]*liquid[i,41]*pancreatic_protease_susceptibility_protein*activity_pancreatic_protease*dt/Volume[i];
-            liquid[i,65] := liquid[i,65] + change; {digestion by pancreatic protease}
+            if change > liquid [i,66] then change := 0;
+            liquid[i,65] := liquid[i,65] + change; {digestion BSA by pancreatic protease into small protein peptides}
             liquid[i,66] := liquid[i,66] - change;
 
    change:= liquid[i,67]*liquid[i,41]*pancreatic_protease_susceptibility_protein*activity_pancreatic_protease*dt/Volume[i];
-            liquid[i,65] := liquid[i,65] + change; {digestion by pancreatic protease}
+            if change > liquid [i,67] then change := 0;
+            liquid[i,65] := liquid[i,65] + change; {digestion BLG by pancreatic protease into small proteien peptides}
             liquid[i,67] := liquid[i,67] - change;
 
-
-
    change:= liquid[i,61]*liquid[i,41]*pancreatic_protease_susceptibility_casein*activity_pancreatic_protease*dt/Volume[i];
-            liquid[i,63] := liquid[i,63] + change; {digestion by pancreatic protease}
+            if change > liquid [i,61] then change := 0;
+            liquid[i,63] := liquid[i,63] + change; {digestion Casein by pancreatic protease into pancreatic casein digest}
             liquid[i,61] := liquid[i,61] - change;
+
    change := liquid[i,62]*pepsin_susceptibility_casein_fragments*pepsin_units(segmentpH,liquid[i,40])*dt/volume[i];
-          liquid[i,64] := liquid[i,64] + change;
+          if change > liquid [i,62] then change := 0;
+          liquid[i,64] := liquid[i,64] + change;  {digestion Casein pepsic digest by pepsin into casein small peptides}
           liquid[i,62] := liquid[i,62] - change;
    change := liquid[i,63]*liquid[i,41]*pancreatic_protease_susceptibility_casein_fragments*activity_pancreatic_protease*dt/Volume[i];
-          liquid[i,64] := liquid[i,64] + change;
+          if change > liquid [i,63] then change := 0;
+          liquid[i,64] := liquid[i,64] + change;  {digestion Casein pancreatic digest by pancreatic protease into casein small peptides}
           liquid[i,63] := liquid[i,63] - change;
 
+   liquid[i,65] := liquid [i,65] + liquid[i,64];  liquid[i,64] := 0; {all small casein peptides are seen as small protein peptides]};
 
 
    {pharmaceutical degradation}   {currently turned of}
@@ -1217,7 +1224,7 @@ begin
  initialiseer;
 
  newmealnumber := 0;
- write('time resolution: steps per minute (6 - 600)) = '); readln(substeps); writeln; writeln;     {substeps defines the number of calculational time steps per prefactor minutes; 60 corresponds with a time resolution of 1 second}
+ write('Enter the time resolution for calculation in steps per minute (6 - 600)) = '); readln(substeps); writeln; writeln;     {substeps defines the number of calculational time steps per prefactor minutes; 60 corresponds with a time resolution of 1 second}
  dt := 1/substeps; {time step in minutes}
  prefactor:= 1; {prefactor defines the number of point per minute that is being stored} ; prefactor:= 1/prefactor;
  volumina;
@@ -1323,7 +1330,7 @@ begin
                 write(out, fat_in_colon:7:5,', ',casein_in_colon:7:5,', ',glucose_in_colon:7:5,', ');
                 write(out, absorbed[3]:7:5,', ',absorbed[20]:7:5,', ',absorbed[51]:7:5,', ',absorbed[54]:7:5,', ',absorbed[64]:7:5,', ',absorbed[65]:7:5,', ');
                 for i := 1 to 16 do write(out, pH[i]:12:8,', ');
-                write(out, (pepsin_units(pH[3],liquid[3,40])/Volume[3]):7:5,', ',(pepsin_units(pH[4],liquid[4,40])/Volume[4]):7:5,', ',solids_in_corpus:7:5,', ',solids_in_fundus:7:5,', ', solids_in_antrum:7:5,', ', total_solids_in_stomach:7:5,', ');
+                write(out, (pepsin_units(pH[3],liquid[3,40])/Volume[3]):7:5,', ',(pepsin_units(pH[4],liquid[4,40])/Volume[4]):7:5,', ',total_solids_corpus:7:5,', ',total_solids_fundus:7:5,', ', total_solids_antrum:7:5,', ', total_solids_in_stomach:7:5,', ');
                 write(out, serum_glucose:7:5,', ',serum_insulin:7:5,', ');
                 write(out, absorbed[5]:7:5,', ', bloodserumconc[5]:7:5,', ');
                 write(out, CCKgastricEmptying_stress:7:5,', ', osmoticgastricemptying_stress:7:5,', ',pHgastricemptying_stress:7:5,', ');

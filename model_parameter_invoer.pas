@@ -36,8 +36,8 @@ for i:= 1 to 16 do hypertrophy[i] := 1;
   Motilinresponsefactor[j]:= 0;
 
   end;
- CCKresponsefactor[20] := 1{200}{0};	{20 fatty acids in min-1 CCKunit-1}
- CCKresponsefactor[54] := 1{200}{0};	{54 bile salt LCFA complex}
+ CCKresponsefactor[20] := 20{200}{0};	{20 fatty acids in min-1 CCKunit-1}
+ CCKresponsefactor[54] := 20{200}{0};	{54 bile salt LCFA complex}
  CCKresponsefactor[64] := 20{0}{20};	{64 caseinpeptides}
  CCKresponsefactor[65] := 20{00}{20};	{65 small peptides}
 
@@ -214,6 +214,8 @@ for i:= 1 to 16 do hypertrophy[i] := 1;
   density[63] := 1.2;
   density[64] := 1.2;
   density[65] := 1.2;
+  density[66] := 1.2;
+  density[67] := 1.2;
   density[80] := 1E6;
  {Calorische waarden}
   For j:= 1 to comp do caloric_value[j] := 0;   {calorische waarden in cal/g van de diverse componenten op 0 zetten}
@@ -296,7 +298,9 @@ for i:= 1 to 16 do hypertrophy[i] := 1;
   VmaxAbsorption[i,65]:= 0.3 {0.3 kcal.m-1.min-1} ;    {peptiden}
   KmAbsorption[i,64]:= 0.02 {0.2 kcal.min-1};
   KmAbsorption[i,65]:= 0.02 {0.2 kcal.min-1};
- {***********}
+
+
+  {***********}
    end;
 
 
@@ -363,7 +367,7 @@ for i:= 1 to 16 do hypertrophy[i] := 1;
 
   for i:= 5 to 15 do for j:= 1 to comp do
     begin
-    surface_factor[i] := 1/(3*100*100*hypertrophy[i]){2E-3};{de reden hiervoor is dat het oppervlak van de brush border door villi en microvilli sterk vergroot is}
+    surface_factor[i] := 1/(3*100*100*hypertrophy[i]){2E-3};{de reden hiervoor is dat het oppervlak van de brush border door villi en microvilli sterk vergroot is en er roering optreedt door peristaltiek}
     {surface_factor[i] :=1/9000; {nieuwe schatting}  }
     T[i,j]:= delta[i]/D[j];
     end;
