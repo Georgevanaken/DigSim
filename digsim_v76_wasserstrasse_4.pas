@@ -524,7 +524,7 @@ begin
           liquid[i,7] := liquid[i,7]+ 0.666666*change;                {7 = diglyceride }
           liquid[i,20] := liquid[i,20] + 0.333333*change;            {20 = fatty acid}
           liquid[i,2]  := liquid[i,2]-change;                        {2 = triglyceride}
-        if liquid[i,2] > 1E-4 then linguallipolysis_rate[i] := 100*change/liquid[i,2];
+        if liquid[i,2] > 1E-10 then linguallipolysis_rate[i] := 100*change/liquid[i,2];
         total_linguallipaselipolysis_rate := total_linguallipaselipolysis_rate + linguallipolysis_rate[i] ;
 
    change := LinguallipolysisCST*liquid[i,48]*liquid[i,7]*dt/SQR(Volume[i]);   {50 = pancreatic lipase}   {1 Diglyceride is hydrolysed into 1 monoglyceride + 1 FA}
@@ -542,14 +542,14 @@ begin
           liquid[i,7] := liquid[i,7]+ 0.666666*change;                {7 = diglyceride }
           liquid[i,20] := liquid[i,20] + 0.333333*change;            {20 = fatty acid}
           liquid[i,2]  := liquid[i,2]-change;                        {2 = triglyceride}
-        if liquid[i,2] > 1E-4 then gastriclipolysis_rate[i] := 100*change/liquid[i,2];
+        if liquid[i,2] > 1E-10 then gastriclipolysis_rate[i] := 100*change/liquid[i,2];
         total_gastriclipaselipolysis_rate := total_gastriclipaselipolysis_rate + gastriclipolysis_rate[i] ;
 
    change := PancreaticlipolysisCST*liquid[i,50]*liquid[i,2]*dt/SQR(Volume[i]);      {50 = pancreatic lipase}   {1 TG is hydrolysed into 1 diglyceride  + 1 FA}
           liquid[i,7] := liquid[i,7] +0.666666*change;
           liquid[i,20] := liquid[i,20]+ 0.333333*change;
           liquid[i,2]  := liquid[i,2]-change;
-        if liquid[i,2]> 1E-4 then pancreaticlipolysis_rate[i] := 100*change/liquid[i,2];
+        if liquid[i,2]> 1E-10 then pancreaticlipolysis_rate[i] := 100*change/liquid[i,2];
         total_pancreaticlipaselipolysis_rate := total_pancreaticlipaselipolysis_rate + pancreaticlipolysis_rate[i];
 
    change := PancreaticlipolysisCST*liquid[i,50]*liquid[i,7]*dt/SQR(Volume[i]);      {50 = pancreatic lipase}   {1 Diglyceride is hydrolysed into 1 monoglyceride + 1 FA}
@@ -773,14 +773,14 @@ var totaltargetabsorption_rate, delay, change: real;
      For i := 5 to 15 do
          total_glucose_absorption_rate := total_glucose_absorption_rate+absorption_rate[i,3]+absorption_rate[i,34]+absorption_rate[i,35] ;
      total_glucose_absorption_rate:= total_glucose_absorption_rate/180.15588; {in moles/min}
-         {**** absorption hydrogen ions, currently set off }
+         {**** absorption hydrogen ions, currently inactive }
        { hulp := liquid[i,61]+liquid[i,62]+liquid[i,63]+liquid[i,64]+liquid[i,65];
          for i:= 5 to 15 do
          absorption_rate[i,80] := -0.002*(absorption_rate[i,64]+absorption_rate[i,65]);    {peptiden wordt in neutrale vorm geabsorpbeerd}
          absorption_rate[i,80] := absorption_rate[i,1]*Ber_hydrogen(pH[i], hulp, liquid[i,66], liquid[i,55], liquid[i,67],liquid[i,4])/liquid[i,1];}
         {**** end absorption hydrogen ions }
 
-        {calcualtion of total absorption rate in the small intestines}
+        {calculation of total absorption rate in the small intestines}
         for j := 1 to comp do  begin totalabsorption_rate[j]:= 0; absorbed[j] := 0;  end;
         for j := 1 to comp do
           begin

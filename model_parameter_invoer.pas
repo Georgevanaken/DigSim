@@ -36,16 +36,16 @@ for i:= 1 to 16 do hypertrophy[i] := 1;
   Motilinresponsefactor[j]:= 0;
 
   end;
- CCKresponsefactor[20] := 20{200}{0};	{20 fatty acids in min-1 CCKunit-1}
- CCKresponsefactor[54] := 20{200}{0};	{54 bile salt LCFA complex}
- CCKresponsefactor[64] := 20{0}{20};	{64 caseinpeptides}
- CCKresponsefactor[65] := 20{00}{20};	{65 small peptides}
+ CCKresponsefactor[20] := 2000{20};	{20 fatty acids in min-1 CCKunit-1}
+ CCKresponsefactor[54] := 2000{20};	{54 bile salt LCFA complex}
+ CCKresponsefactor[64] := 200{20};	{64 caseinpeptides}
+ CCKresponsefactor[65] := 100{20};	{65 small peptides}
 
  PYYresponsefactor[3]  := 100;	{3 = glucose}
   PYYresponsefactor[34]  := 100;	{34 = glucose1}
   PYYresponsefactor[35]  := 100;	{35 = glucose2}
- PYYresponsefactor[20] := 1{200};	{20 fatty acids in min-1 CCKunit-1}
- PYYresponsefactor[54] := 1{200};	{54 bile salt LCFA complex}
+ PYYresponsefactor[20] := 200{1}{200};	{20 fatty acids in min-1 CCKunit-1}
+ PYYresponsefactor[54] := 200{1}{200};	{54 bile salt LCFA complex}
  PYYresponsefactor[64] := 100;	{64 caseinpeptides}
  PYYresponsefactor[65] := 100;	{65 small peptides}
 

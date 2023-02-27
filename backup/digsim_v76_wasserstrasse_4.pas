@@ -2,7 +2,7 @@ Program digsim_v76_wasserstrasse_4;
 uses crt, sysutils, gastric_acid_secretion, globalvariables, calc_Mucin_hydrogen,
   calc_Casein_hydrogen, calc_BSA_hydrogen, calc_BLG_hydrogen, calc_Protein_hydrogen,
   SubcellularInsulin_Pederson, Liver_clearance,diet_from_file,
-  Brush_border_enzymes, Model_Parameter_Invoer, Gastric_motility_3,
+  Brush_border_enzymes, Model_Parameter_Invoer, Gastric_motility,
   Compartment_properties, Glucose_homeostasis2, Hb_glycosylation, MMC;
 
 
@@ -381,7 +381,7 @@ var  Boost, brake:real;
 const pi = 3.14159; max_mouth_volume_intake = 10; max_mouth_volume_swallow = 1.5;   {max_mouth_volume_intake is the maximum volume of food in the mouth; max_mouth_volume_swallow determines the volume of saliva or free liquid that triggers a swallowing reflex}
 begin
   CCKtrans:= 1; {this is roughly the tipping point in the CCK blood level above whcih gastric tone rapidly declines and gastric emptying becomes prodominantly calcorically controlled}
-  Transition:= CCK/CCKtrans; Transition:= SQR(SQR(Transition)); Transition:=Transition/(1+Transition);
+  Transition:= CCK/CCKtrans; {Transition:= SQR(SQR(Transition));} Transition:=Transition/(1+Transition);
 
 {transport from dishes}
   for dishnumber := 1 to 5 do
@@ -524,7 +524,7 @@ begin
           liquid[i,7] := liquid[i,7]+ 0.666666*change;                {7 = diglyceride }
           liquid[i,20] := liquid[i,20] + 0.333333*change;            {20 = fatty acid}
           liquid[i,2]  := liquid[i,2]-change;                        {2 = triglyceride}
-        if liquid[i,2] > 1E-4 then linguallipolysis_rate[i] := 100*change/liquid[i,2];
+        if liquid[i,2] > 1E-10 then linguallipolysis_rate[i] := 100*change/liquid[i,2];
         total_linguallipaselipolysis_rate := total_linguallipaselipolysis_rate + linguallipolysis_rate[i] ;
 
    change := LinguallipolysisCST*liquid[i,48]*liquid[i,7]*dt/SQR(Volume[i]);   {50 = pancreatic lipase}   {1 Diglyceride is hydrolysed into 1 monoglyceride + 1 FA}
@@ -542,14 +542,14 @@ begin
           liquid[i,7] := liquid[i,7]+ 0.666666*change;                {7 = diglyceride }
           liquid[i,20] := liquid[i,20] + 0.333333*change;            {20 = fatty acid}
           liquid[i,2]  := liquid[i,2]-change;                        {2 = triglyceride}
-        if liquid[i,2] > 1E-4 then gastriclipolysis_rate[i] := 100*change/liquid[i,2];
+        if liquid[i,2] > 1E-10 then gastriclipolysis_rate[i] := 100*change/liquid[i,2];
         total_gastriclipaselipolysis_rate := total_gastriclipaselipolysis_rate + gastriclipolysis_rate[i] ;
 
    change := PancreaticlipolysisCST*liquid[i,50]*liquid[i,2]*dt/SQR(Volume[i]);      {50 = pancreatic lipase}   {1 TG is hydrolysed into 1 diglyceride  + 1 FA}
           liquid[i,7] := liquid[i,7] +0.666666*change;
           liquid[i,20] := liquid[i,20]+ 0.333333*change;
           liquid[i,2]  := liquid[i,2]-change;
-        if liquid[i,2]> 1E-4 then pancreaticlipolysis_rate[i] := 100*change/liquid[i,2];
+        if liquid[i,2]> 1E-10 then pancreaticlipolysis_rate[i] := 100*change/liquid[i,2];
         total_pancreaticlipaselipolysis_rate := total_pancreaticlipaselipolysis_rate + pancreaticlipolysis_rate[i];
 
    change := PancreaticlipolysisCST*liquid[i,50]*liquid[i,7]*dt/SQR(Volume[i]);      {50 = pancreatic lipase}   {1 Diglyceride is hydrolysed into 1 monoglyceride + 1 FA}
@@ -773,7 +773,7 @@ var totaltargetabsorption_rate, delay, change: real;
      For i := 5 to 15 do
          total_glucose_absorption_rate := total_glucose_absorption_rate+absorption_rate[i,3]+absorption_rate[i,34]+absorption_rate[i,35] ;
      total_glucose_absorption_rate:= total_glucose_absorption_rate/180.15588; {in moles/min}
-         {**** absorption hydrogen ions, currently set off }
+         {**** absorption hydrogen ions, currently inactive }
        { hulp := liquid[i,61]+liquid[i,62]+liquid[i,63]+liquid[i,64]+liquid[i,65];
          for i:= 5 to 15 do
          absorption_rate[i,80] := -0.002*(absorption_rate[i,64]+absorption_rate[i,65]);    {peptiden wordt in neutrale vorm geabsorpbeerd}

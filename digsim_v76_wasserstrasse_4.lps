@@ -4,94 +4,120 @@
     <PathDelim Value="\"/>
     <Version Value="12"/>
     <BuildModes Active="Default"/>
-    <Units Count="14">
+    <Units Count="16">
       <Unit0>
         <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="1326"/>
-        <CursorPos X="4" Y="1358"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="51"/>
+        <CursorPos X="17" Y="783"/>
+        <UsageCount Value="27"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="gastric_acid_secretion.pas"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="27"/>
       </Unit1>
       <Unit2>
         <Filename Value="globalvariables.pas"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="27"/>
       </Unit2>
       <Unit3>
         <Filename Value="calc_mucin_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_Mucin_hydrogen"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="27"/>
       </Unit3>
       <Unit4>
         <Filename Value="calc_casein_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_Casein_hydrogen"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="27"/>
       </Unit4>
       <Unit5>
         <Filename Value="calc_bsa_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_BSA_hydrogen"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="27"/>
       </Unit5>
       <Unit6>
         <Filename Value="calc_glg_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_GLG_hydrogen"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="27"/>
       </Unit6>
       <Unit7>
         <Filename Value="liver_clearance.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Liver_clearance"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="27"/>
       </Unit7>
       <Unit8>
         <Filename Value="calc_protein_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_Protein_hydrogen"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="27"/>
       </Unit8>
       <Unit9>
         <Filename Value="brush_border_enzymes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Brush_border_enzymes"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="27"/>
       </Unit9>
       <Unit10>
         <Filename Value="gastic_motility.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Gastric_motility"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="27"/>
       </Unit10>
       <Unit11>
         <Filename Value="compartment_properties.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Compartment_properties"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="27"/>
       </Unit11>
       <Unit12>
         <Filename Value="hb_glycosylation.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Hb_glycosylation"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="27"/>
       </Unit12>
       <Unit13>
         <Filename Value="mmc.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="MMC"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="27"/>
       </Unit13>
+      <Unit14>
+        <Filename Value="model_parameter_invoer.pas"/>
+        <UnitName Value="Model_Parameter_Invoer"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="34"/>
+        <CursorPos X="36" Y="40"/>
+        <UsageCount Value="13"/>
+        <Loaded Value="True"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="diet_from_file.pas"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="26"/>
+        <CursorPos Y="42"/>
+        <UsageCount Value="12"/>
+        <Loaded Value="True"/>
+      </Unit15>
     </Units>
-    <JumpHistory HistoryIndex="-1"/>
+    <JumpHistory Count="2" HistoryIndex="1">
+      <Position1>
+        <Filename Value="model_parameter_invoer.pas"/>
+        <Caret Line="42" Column="30" TopLine="26"/>
+      </Position1>
+      <Position2>
+        <Filename Value="model_parameter_invoer.pas"/>
+        <Caret Line="40" Column="36" TopLine="34"/>
+      </Position2>
+    </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode="default"/>

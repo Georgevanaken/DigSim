@@ -3,26 +3,27 @@ reference time (minutes after midnight corresponding with time = 0			(min)	500
 																								
 time	compound	amount	dish	eating speed																				
 (min)	(number)	(g)	(number)	(ml/min)																				
-0.0	8	50	1	50																				
-1.0	1	250	1	50																				
+2.0	11	50	1	50																				
+5.0	1	250	1	50																				
+300.0	1	250	1	250																				
 9999																								
 																								
 compound number		(number)	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	9999						
 Compound quantifiers			water	glucose	sucrose	milk choc	milk choc arab	gastic milk choc'!A1	gastic milk choc arab'!A1	emulsie	arabinose	Rapid starch	Slow starch	resistant starch	extruded	biscuit	BLG							
 pH		(-)	7	7	7	7	7	7	7	7	7	7	7	7	7	7	7							
-solid		particlesize (mm)	0	1	1	1	1	0	0	0	1	2	1	1	1	1	1							
-viscosity 		(mPa.s)	1	1	1	1	1	1000	1000	1	1	1000	1	1	10000	10000	1							
-oral decomposition time		(min)	0.1	0.1	0.1	1	1	5	5	1	0.1	10	50	1	10	20	1							
+solid		particlesize (mm)	0	1	1	1	1	0	0	0	1	1	1	1	1	1	1							
+viscosity 		(mPa.s)	1	1	1	1	1	1000	1000	1	1	1	1	1	10000	10000	1							
+oral decomposition time		(min)	0.1	0.1	0.1	1	1	5	5	1	0.1	2	100	1	10	20	1							
 		decomposes into (compound)	0	0	0	6	7	0	0	0	0	0	0	0	10	11	0							
 		(%)	0	0	0	95	95	0	0	0	0	0	0	0	50	100	0							
 		and (compound)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
 		(%)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-gastric decomposition time		(min)	0.1	0.1	0.1	5	5	50	50	1	0.1	10	50	1	10	100	1							
+gastric decomposition time		(min)	0.1	0.1	0.1	5	5	50	50	1	0.1	1	100	1	10	100	1							
 		decomposes into (compound)	0	0	0	6	7	0	0	0	0	0	0	0	10	11	0							
 		(%)	0	0	0	100	100	0	0	0	0	0	0	0	50	100	0							
 		and (compound)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
 		(%)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-intestinal decomposition time		(min)	0.1	0.1	0.1	1	1	1	1	1	0.1	2	10	1	10	100	1							
+intestinal decomposition time		(min)	0.1	0.1	0.1	1	1	1	1	1	0.1	1	10	1	10	100	1							
 		decomposes into (compound)	0	0	0	6	7	0	0	0	0	0	0	0	10	11	0							
 		(%)	0	0	0	100	100	0	0	0	0	0	0	0	50	100	0							
 		and (compound)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
