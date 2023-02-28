@@ -1,79 +1,80 @@
-Inlezen maaltijden																								
-reference time (minutes after midnight corresponding with time = 0			(min)	500																				
-																								
-time	compound	amount	dish	eating speed																				
-(min)	(number)	(g)	(number)	(ml/min)																				
-2.0	11	50	1	50																				
-5.0	1	250	1	50																				
-300.0	1	250	1	250																				
-9999																								
-																								
-compound number		(number)	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	9999						
-Compound quantifiers			water	glucose	sucrose	milk choc	milk choc arab	gastic milk choc'!A1	gastic milk choc arab'!A1	emulsie	arabinose	Rapid starch	Slow starch	resistant starch	extruded	biscuit	BLG							
-pH		(-)	7	7	7	7	7	7	7	7	7	7	7	7	7	7	7							
-solid		particlesize (mm)	0	1	1	1	1	0	0	0	1	1	1	1	1	1	1							
-viscosity 		(mPa.s)	1	1	1	1	1	1000	1000	1	1	1	1	1	10000	10000	1							
-oral decomposition time		(min)	0.1	0.1	0.1	1	1	5	5	1	0.1	2	100	1	10	20	1							
-		decomposes into (compound)	0	0	0	6	7	0	0	0	0	0	0	0	10	11	0							
-		(%)	0	0	0	95	95	0	0	0	0	0	0	0	50	100	0							
-		and (compound)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-		(%)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-gastric decomposition time		(min)	0.1	0.1	0.1	5	5	50	50	1	0.1	1	100	1	10	100	1							
-		decomposes into (compound)	0	0	0	6	7	0	0	0	0	0	0	0	10	11	0							
-		(%)	0	0	0	100	100	0	0	0	0	0	0	0	50	100	0							
-		and (compound)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-		(%)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-intestinal decomposition time		(min)	0.1	0.1	0.1	1	1	1	1	1	0.1	1	10	1	10	100	1							
-		decomposes into (compound)	0	0	0	6	7	0	0	0	0	0	0	0	10	11	0							
-		(%)	0	0	0	100	100	0	0	0	0	0	0	0	50	100	0							
-		and (compound)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-		(%)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-																								
-																								
-	Ingredient																							
-1	water	(g)	100	0	0	0	0	36.94	36.94	50	0	0	0	0	14	14	0							
-2	fat	(g)	0	0	0	32.73	32.73	29.13	29.13	50	0	0	0	0	0	0	0							
-3	glucose	(g)	0	99	0	0	0	0	0	0	0	0	0	0	0	0	0							
-4	protein	(g)	0	0	0	1.08	1.08	1.08	1.08	0	0	0	0	0	0	0	0							
-5	pharm	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-6	pharm inactive	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-10	RDS	(g)	0	0	0	0	0	0	0	0	0	99	0	0	75	0	0							
-11	SDS	(g)	0	0	0	0	0	0	0	0	0	0	99	0	0	75	0							
-12	RS	(g)	0	0	0	6	6	1.78	1.78	0	0	0	0	99	0	0	0							
-20	FA	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-21	sucrose	(g)	0	0	98	40.5	28.7	19	14	0	0	0	0	0	9	9	0							
-22	fructose	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-23	maltose	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-24	13C maltose	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-25	arabinose	(g)	0	0	0	0	11.9	0	5	0	100	0	0	0	0	0	0							
-26	xylose	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-27	acarbose	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-34	13C glucose	(g)	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0							
-35	2H glucose	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-36	13C sucrose	(g)	0	0	2	1	1	1	1	0	0	0	0	0	0	0	0							
-40	pepsin	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-41	pancreatic proteases	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-50	lipase	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-51	bile salts	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-52	bile phospholipids	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-53	bile lysophospholipids	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-54	bile salt LCFA complex	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-55	mucus protein	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-56	pancreatic fosfolipase	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-57	salivary_amylase	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-58	pancreatic_amylase	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-60	CCK releasing protein   	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-61	casein	(g)	0	0	0	9	9	2.31	2.31	0	0	0	0	0	0	0	0							
-62	caseinpep	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-63	caseinpan	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-64	small peptides	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-65	casein peptides	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-66	BSA	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-67	BLG	(g)	0	0	0	10	10	8.59	8.59	0	0	0	0	0	0	0	100							
-70	Leu	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-71	Leutrac	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-78	NaCl	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-79	HCO3-	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-80	H+ ions	(mol)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
-0			100	100	100	100.31	100.41	99.83	99.83	100	100	99	99	99	98	98	100							
-	density	(g/ml)	1	1.44	1.44	1.3	1.3	1.2	1.2	0.95	1.44	1.44	1.44	1.44	1.4	1.4	1.4							
+Inlezen maaltijden																									
+reference time (minutes after midnight corresponding with time = 0			(min)	500																					
+																									
+time	compound	amount	dish	eating speed																					
+(min)	(number)	(g)	(number)	(ml/min)																					
+0.0	15	20	1	50																					
+1.0	1	250	1	50																					
+200.0	16	20	1	50																					
+200.1	1	250	1	50																					
+9999																									
+																									
+compound number		(number)	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	9999						
+Compound quantifiers			water	glucose	sucrose	milk choc	milk choc arab	gastic milk choc'!A1	gastic milk choc arab'!A1	emulsie	arabinose	Rapid starch	Slow starch	resistant starch	extruded	biscuit	BLG	Bcasein							
+pH		(-)	7	7	7	7	7	7	7	7	7	7	7	7	7	7	7	7							
+solid		particlesize (mm)	0	1	1	1	1	0	0	0	1	2	1	1	1	1	1	1							
+viscosity 		(mPa.s)	1	1	1	1	1	1000	1000	1	1	1000	1	1	10000	10000	1	1							
+oral decomposition time		(min)	0.1	0.1	0.1	1	1	5	5	1	0.1	10	50	1	10	20	0.1	0.1							
+		decomposes into (compound)	0	0	0	6	7	0	0	0	0	0	0	0	10	11	0	0							
+		(%)	0	0	0	95	95	0	0	0	0	0	0	0	50	100	0	0							
+		and (compound)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+		(%)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+gastric decomposition time		(min)	0.1	0.1	0.1	5	5	50	50	1	0.1	10	50	1	10	100	0.1	0.1							
+		decomposes into (compound)	0	0	0	6	7	0	0	0	0	0	0	0	10	11	0	0							
+		(%)	0	0	0	100	100	0	0	0	0	0	0	0	50	100	0	0							
+		and (compound)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+		(%)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+intestinal decomposition time		(min)	0.1	0.1	0.1	1	1	1	1	1	0.1	2	10	1	10	100	0.1	0.1							
+		decomposes into (compound)	0	0	0	6	7	0	0	0	0	0	0	0	10	11	0	0							
+		(%)	0	0	0	100	100	0	0	0	0	0	0	0	50	100	0	0							
+		and (compound)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+		(%)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+																									
+																									
+	Ingredient																								
+1	water	(g)	100	0	0	0	0	36.94	36.94	50	0	0	0	0	14	14	0	0							
+2	fat	(g)	0	0	0	32.73	32.73	29.13	29.13	50	0	0	0	0	0	0	0	0							
+3	glucose	(g)	0	99	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+4	protein	(g)	0	0	0	1.08	1.08	1.08	1.08	0	0	0	0	0	0	0	0	0							
+5	pharm	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+6	pharm inactive	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+10	RDS	(g)	0	0	0	0	0	0	0	0	0	99	0	0	75	0	0	0							
+11	SDS	(g)	0	0	0	0	0	0	0	0	0	0	99	0	0	75	0	0							
+12	RS	(g)	0	0	0	6	6	1.78	1.78	0	0	0	0	99	0	0	0	0							
+20	FA	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+21	sucrose	(g)	0	0	98	40.5	28.7	19	14	0	0	0	0	0	9	9	0	0							
+22	fructose	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+23	maltose	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+24	13C maltose	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+25	arabinose	(g)	0	0	0	0	11.9	0	5	0	100	0	0	0	0	0	0	0							
+26	xylose	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+27	acarbose	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+34	13C glucose	(g)	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+35	2H glucose	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+36	13C sucrose	(g)	0	0	2	1	1	1	1	0	0	0	0	0	0	0	0	0							
+40	pepsin	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+41	pancreatic proteases	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+50	lipase	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+51	bile salts	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+52	bile phospholipids	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+53	bile lysophospholipids	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+54	bile salt LCFA complex	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+55	mucus protein	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+56	pancreatic fosfolipase	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+57	salivary_amylase	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+58	pancreatic_amylase	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+60	CCK releasing protein   	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+61	casein	(g)	0	0	0	9	9	2.31	2.31	0	0	0	0	0	0	0	0	100							
+62	caseinpep	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+63	caseinpan	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+64	small peptides	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+65	casein peptides	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+66	BSA	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+67	BLG	(g)	0	0	0	10	10	8.59	8.59	0	0	0	0	0	0	0	100	0							
+70	Leu	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+71	Leutrac	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+78	NaCl	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+79	HCO3-	(g)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+80	H+ ions	(mol)	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0							
+0			100	100	100	100.31	100.41	99.83	99.83	100	100	99	99	99	98	98	100	100							
+	density	(g/ml)	1	1.44	1.44	1.3	1.3	1.2	1.2	0.95	1.44	1.44	1.44	1.44	1.4	1.4	1.4	1.4							

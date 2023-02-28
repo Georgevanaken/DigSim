@@ -2,7 +2,7 @@ Program digsim_v76_wasserstrasse_4;
 uses crt, sysutils, gastric_acid_secretion, globalvariables, calc_Mucin_hydrogen,
   calc_Casein_hydrogen, calc_BSA_hydrogen, calc_BLG_hydrogen, calc_Protein_hydrogen,
   SubcellularInsulin_Pederson, Liver_clearance,diet_from_file,
-  Brush_border_enzymes, Model_Parameter_Invoer, Gastric_motility,
+  Brush_border_enzymes, Model_Parameters, Gastric_motility,
   Compartment_properties, Glucose_homeostasis2, Hb_glycosylation, MMC;
 
 
