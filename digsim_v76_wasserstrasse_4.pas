@@ -88,7 +88,9 @@ uses crt, sysutils, gastric_acid_secretion, globalvariables, calc_Mucin_hydrogen
 
  70 = Leucine
  71 = Leucine tracer
-
+ 72 = I_c      competitive alpa amylase inhibitor
+ 73 = I_a      acompetitive alpha amylase inhibitor
+ 74 = I_nc     non competitive alpha amylase inhibitor
  78 = NaCl
  79 = HCO3-
  80 = H+ ionen (in moles)}
@@ -390,7 +392,7 @@ begin
         if  volumedish[dishnumber] <1E-9 then updish[dishnumber]:= 0;
         if volume[2]> max_mouth_volume_intake then updish[dishnumber] := 0; {avoids mouth congestion; no more food intake with a full mouth}
    end;
-{calcualtion of mastication time and moment of swallowing}
+{calculation of mastication time and moment of swallowing}
   solid_volume := 0;large_solids:= 0; surface_solids := 0;
   for compoundnumber := 1 to number_of_compounds do
        begin
@@ -496,6 +498,7 @@ end;
 procedure digestion;       {this procedure describes the digestive transformation of each compound into degested species}
 var change: real;
     linguallipolysis_rate, gastriclipolysis_rate, pancreaticlipolysis_rate: component;
+    salivary_amylase_inhibition, pancreatic_amylase_inhibition:component;
 const pepsin_susceptibility_casein =0.01;
       pepsin_susceptibility_protein = 0.001;
       pancreatic_protease_susceptibility_casein = 1;
@@ -509,7 +512,21 @@ const pepsin_susceptibility_casein =0.01;
       pancreatic_amylase_susceptibility_SDstarch = 0.2;
       salivary_amylase_susceptibility_Rstarch = 0.0;
       pancreatic_amylase_susceptibility_Rstarch = 0.0;
-      AU = 1000* 3.333E-4;  {1 amylase unit = 1 mg maltose/3min}
+      AU = 1000* 3.333E-4;  {1 amylase unit = 1 mg maltose/3min, based on the Infogest protocol}
+      K_ms = 50E-6 {g/ml}; {Estimated Michaelis Menten constant for salivary amylase}
+      K_cs = 50E-6 {g/ml}; {competitive inibitor constant for salivary amylase}                        {50E-6 g/ml is the IC50 value for the competitive inhibitor acarbose}
+      K_as = 50E-6 {g/ml}; {acompetitive inibitor constant for salivary amylase}
+      K_ncs = 50E-6 {g/ml};{noncompetitive inibitor constant for salivary amylase}
+      K_mp = 50E-6 {g/ml}; {Michaelis Menten constant for pancreatic amylase}
+      K_cp = 50E-6 {g/ml}; {competitive inibitor constant for pancreatic amylase}
+      K_ap = 50E-6 {g/ml}; {acompetitive inibitor constant for pancreatic amylase}
+      K_ncp = 50E-6 {g/ml};{noncompetitive inibitor constant for pancreatic amylase}
+
+
+
+
+
+
 
 begin
   total_linguallipaselipolysis_rate :=0;
@@ -630,21 +647,24 @@ begin
           liquid[i,6] := liquid[i,6]+change;}
 
    {starch digestion}
+        {72 = I_c      competitive alpa amylase inhibitor
+        73 = I_a      acompetitive alpha amylase inhibitor
+        74 = I_nc     non competitive alpha amylase inhibitor}
+    {including acompetitive inhibition of alpha amylases by glucose and maltose according to Vrsalovic Presecki "Mathematical modeling of amylase catalyzed starch hydrolysis."}
    liquid[i,57]:= liquid[i,57] -dt*liquid[i,57]*exp(5*ln(5/(5+pH[i])));    {degradation of salivary amylase at low pH}
-   change := AU*liquid[i,10]*salivary_amylase_susceptibility_HDstarch*liquid[i,57]*dt/{SQR}(volume[i]);  {0.001 is Km in g/ml}
-          change := change + 20*AU*liquid[i,10]*pancreatic_amylase_susceptibility_HDstarch*liquid[i,58]*dt/{SQR}(volume[i]);  {0.001 is Km in g/ml}
+   change := AU*liquid[i,10]*salivary_amylase_susceptibility_HDstarch*liquid[i,57]*dt/(volume[i]*(K_ms*(1+liquid[i,72]/K_cs) +liquid[i,10]*(1+liquid[i,73]/K_as+liquid[i,3]/0.1+liquid[i,23]/0.035)*(1+liquid[i,74]/K_ncs)));
+          change := change + 20*AU*liquid[i,10]*pancreatic_amylase_susceptibility_HDstarch*liquid[i,58]*dt/(volume[i]*(K_mp*(1+liquid[i,72]/K_cp )+liquid[i,10]*(1+(liquid[i,73]/K_ap+liquid[i,3]/0.1+liquid[i,23]/0.035 ))*(1+liquid[i,74]/K_ncp )));
         if change> liquid[i,10] then change:= liquid[i,10];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
           liquid[i,10] := liquid[i,10] - change;
-   change := AU*liquid[i,11]*salivary_amylase_susceptibility_SDstarch*liquid[i,57]*dt/{SQR}(volume[i]);  {0.001 is Km in g/ml}
-          change := change + 20*AU*liquid[i,11]*pancreatic_amylase_susceptibility_SDstarch*liquid[i,58]*dt/{SQR}(volume[i]);  {0.001 is Km in g/ml}
-          if change> liquid[i,11] then change:= liquid[i,11];
+   change := AU*liquid[i,11]*salivary_amylase_susceptibility_SDstarch*liquid[i,57]*dt/(volume[i]*((K_ms*(1+(liquid[i,72])/K_cs )+liquid[i,11]*(1+(liquid[i,73])/K_as+liquid[i,3]/0.1+liquid[i,23]/0.035 ))*(1+liquid[i,74]/K_ncs )));
+          change := change + 20*AU*liquid[i,11]*pancreatic_amylase_susceptibility_SDstarch*liquid[i,58]*dt/(volume[i]*((K_mp*(1+(liquid[i,72])/K_cp )+liquid[i,11]*(1+(liquid[i,73])/K_ap+liquid[i,3]/0.1+liquid[i,23]/0.035 ))*(1+liquid[i,74]/K_ncp )));
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
           liquid[i,11] := liquid[i,11] - change;
-   change := AU*liquid[i,12]*salivary_amylase_susceptibility_Rstarch*liquid[i,57]*dt/{SQR}(volume[i]);  {0.001 is Km in g/ml}
-          change := change + 20*AU*liquid[i,12]*pancreatic_amylase_susceptibility_Rstarch*liquid[i,58]*dt/{SQR}(volume[i]);  {0.001 is Km in g/ml}
+   change := AU*liquid[i,12]*salivary_amylase_susceptibility_Rstarch*liquid[i,57]*dt/(volume[i]*((K_ms*(1+(liquid[i,72])/K_cs )+liquid[i,12]*(1+(liquid[i,73])/K_as+liquid[i,3]/0.1+liquid[i,23]/0.035 ))*(1+liquid[i,74]/K_ncs )));  {0.001 is Km in g/ml}
+          change := change + 20*AU*liquid[i,12]*pancreatic_amylase_susceptibility_Rstarch*liquid[i,58]*dt/(volume[i]*((K_mp*(1+(liquid[i,72])/K_cp )+liquid[i,12]*(1+(liquid[i,73])/K_ap+liquid[i,3]/0.1+liquid[i,23]/0.035 ))*(1+liquid[i,74]/K_ncp )));  {0.001 is Km in g/ml}
           if change> liquid[i,12] then change:= liquid[i,12];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
