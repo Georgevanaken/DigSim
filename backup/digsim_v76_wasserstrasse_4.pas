@@ -512,13 +512,13 @@ const pepsin_susceptibility_casein =0.01;
       pancreatic_amylase_susceptibility_SDstarch = 0.2;
       salivary_amylase_susceptibility_Rstarch = 0.0;
       pancreatic_amylase_susceptibility_Rstarch = 0.0;
-      AU = 100000* 3.333E-4;  {1 amylase unit = 1 mg maltose/3min, based on the Infogest protocol}
+      AU = 100* 3.333E-4;  {1 amylase unit = 1 mg maltose/3min, based on the Infogest protocol}
       K_ms = 5E-6 {g/ml}; {Estimated Michaelis Menten constant for salivary amylase}
-      K_cs = 5E-6 {g/ml}; {competitive inibitor constant for salivary amylase}                        {50E-6 g/ml is the IC50 value for the competitive inhibitor acarbose}
+      K_cs = 5E-8 {g/ml}; {competitive inibitor constant for salivary amylase}                        {50E-6 g/ml is the IC50 value for the competitive inhibitor acarbose}
       K_as = 5E-6 {g/ml}; {acompetitive inibitor constant for salivary amylase}
       K_ncs = 5E-6 {g/ml};{noncompetitive inibitor constant for salivary amylase}
       K_mp = 5E-6 {g/ml}; {Michaelis Menten constant for pancreatic amylase}
-      K_cp = 5E-6 {g/ml}; {competitive inibitor constant for pancreatic amylase}
+      K_cp = 5E-8 {g/ml}; {competitive inibitor constant for pancreatic amylase}
       K_ap = 5E-6 {g/ml}; {acompetitive inibitor constant for pancreatic amylase}
       K_ncp = 5E-6 {g/ml};{noncompetitive inibitor constant for pancreatic amylase}
 
