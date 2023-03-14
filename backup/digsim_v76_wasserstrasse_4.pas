@@ -512,9 +512,9 @@ const pepsin_susceptibility_casein =0.01;
       pancreatic_amylase_susceptibility_SDstarch = 0.2;
       salivary_amylase_susceptibility_Rstarch = 0.0;
       pancreatic_amylase_susceptibility_Rstarch = 0.0;
-      AU = 100* 3.333E-4;  {1 amylase unit = 1 mg maltose/3min, based on the Infogest protocol}
+      AU = 0.3333E-3{1000* 3.333E-4};  {1 amylase unit = 1 mg maltose/3min, based on the Infogest protocol}
       K_ms = 5E-6 {g/ml}; {Estimated Michaelis Menten constant for salivary amylase}
-      K_cs = 5E-8 {g/ml}; {competitive inibitor constant for salivary amylase}                        {50E-6 g/ml is the IC50 value for the competitive inhibitor acarbose}
+      K_cs = 5E-8 {g/ml}; {competitive inibitor constant for salivary amylase}                        {50E-6 g/ml is the IC50 value for the competitive alpha glucosidase inhibitor acarbose}
       K_as = 5E-6 {g/ml}; {acompetitive inibitor constant for salivary amylase}
       K_ncs = 5E-6 {g/ml};{noncompetitive inibitor constant for salivary amylase}
       K_mp = 5E-6 {g/ml}; {Michaelis Menten constant for pancreatic amylase}
@@ -652,20 +652,20 @@ begin
         74 = I_nc     non competitive alpha amylase inhibitor}
     {including acompetitive inhibition of alpha amylases by glucose and maltose according to Vrsalovic Presecki "Mathematical modeling of amylase catalyzed starch hydrolysis."}
    liquid[i,57]:= liquid[i,57] -dt*liquid[i,57]*exp(5*ln(5/(5+pH[i])));    {degradation of salivary amylase at low pH}
-   change := AU*concentration_lumen[i,10]*salivary_amylase_susceptibility_HDstarch*concentration_lumen[i,57]*dt/({volume[i]*}((K_ms*(1+concentration_lumen[i,72]/K_cs) +concentration_lumen[i,10]*(1+concentration_lumen[i,73]/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035)*(1+concentration_lumen[i,74]/K_ncs))));
-          change := change + 20*AU*concentration_lumen[i,10]*pancreatic_amylase_susceptibility_HDstarch*concentration_lumen[i,58]*dt/({volume[i]*}((K_mp*(1+concentration_lumen[i,72]/K_cp )+concentration_lumen[i,10]*(1+(concentration_lumen[i,73]/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp ))));
+   change := AU*liquid[i,10]*salivary_amylase_susceptibility_HDstarch*liquid[i,57]*dt/(((K_ms*(1+concentration_lumen[i,72]/K_cs) +concentration_lumen[i,10]*(1+concentration_lumen[i,73]/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035)*(1+concentration_lumen[i,74]/K_ncs))));
+          change := change + {20*}AU*liquid[i,10]*pancreatic_amylase_susceptibility_HDstarch*liquid[i,58]*dt/(((K_mp*(1+concentration_lumen[i,72]/K_cp )+concentration_lumen[i,10]*(1+(concentration_lumen[i,73]/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp ))));
         if change> liquid[i,10] then change:= liquid[i,10];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
           liquid[i,10] := liquid[i,10] - change;
-   change := AU*concentration_lumen[i,11]*salivary_amylase_susceptibility_SDstarch*concentration_lumen[i,57]*dt/({volume[i]*}((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));
-          change := change + 20*AU*concentration_lumen[i,11]*pancreatic_amylase_susceptibility_SDstarch*concentration_lumen[i,58]*dt/({volume[i]*}((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));
+   change := AU*liquid[i,11]*salivary_amylase_susceptibility_SDstarch*liquid[i,57]*dt/(((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));
+          change := change + {20*}AU*liquid[i,11]*pancreatic_amylase_susceptibility_SDstarch*liquid[i,58]*dt/(((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));
           if change> liquid[i,11] then change:= liquid[i,11];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
           liquid[i,11] := liquid[i,11] - change;
-   change := AU*concentration_lumen[i,12]*salivary_amylase_susceptibility_Rstarch*concentration_lumen[i,57]*dt/({volume[i]*}((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));  {0.001 is Km in g/ml}
-          change := change + 20*AU*concentration_lumen[i,12]*pancreatic_amylase_susceptibility_Rstarch*concentration_lumen[i,58]*dt/({volume[i]*}((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));  {0.001 is Km in g/ml}
+   change := AU*liquid[i,12]*salivary_amylase_susceptibility_Rstarch*liquid[i,57]*dt/(((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));  {0.001 is Km in g/ml}
+          change := change + {20*}AU*liquid[i,12]*pancreatic_amylase_susceptibility_Rstarch*liquid[i,58]*dt/(((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));  {0.001 is Km in g/ml}
           if change> liquid[i,12] then change:= liquid[i,12];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
