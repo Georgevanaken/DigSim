@@ -9,99 +9,99 @@
         <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="509"/>
-        <CursorPos X="16" Y="515"/>
-        <UsageCount Value="59"/>
+        <TopLine Value="1351"/>
+        <CursorPos X="111" Y="1369"/>
+        <UsageCount Value="66"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="gastric_acid_secretion.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\gastric_acid_secretion.pas"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="66"/>
       </Unit1>
       <Unit2>
-        <Filename Value="globalvariables.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\globalvariables.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="5"/>
         <CursorPos X="13" Y="16"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="66"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
-        <Filename Value="calc_mucin_hydrogen.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\calc_mucin_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_Mucin_hydrogen"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="66"/>
       </Unit3>
       <Unit4>
-        <Filename Value="calc_casein_hydrogen.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\calc_casein_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_Casein_hydrogen"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="66"/>
       </Unit4>
       <Unit5>
-        <Filename Value="calc_bsa_hydrogen.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\calc_bsa_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_BSA_hydrogen"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="66"/>
       </Unit5>
       <Unit6>
-        <Filename Value="calc_glg_hydrogen.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\calc_glg_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_GLG_hydrogen"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="66"/>
       </Unit6>
       <Unit7>
-        <Filename Value="liver_clearance.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\liver_clearance.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Liver_clearance"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="66"/>
       </Unit7>
       <Unit8>
-        <Filename Value="calc_protein_hydrogen.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\calc_protein_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_Protein_hydrogen"/>
         <EditorIndex Value="4"/>
         <TopLine Value="7"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="66"/>
         <Loaded Value="True"/>
       </Unit8>
       <Unit9>
-        <Filename Value="brush_border_enzymes.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\brush_border_enzymes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Brush_border_enzymes"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="66"/>
       </Unit9>
       <Unit10>
-        <Filename Value="gastic_motility.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\gastic_motility.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Gastric_motility"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="66"/>
       </Unit10>
       <Unit11>
-        <Filename Value="compartment_properties.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\compartment_properties.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Compartment_properties"/>
         <EditorIndex Value="1"/>
         <TopLine Value="49"/>
         <CursorPos Y="54"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="66"/>
         <Loaded Value="True"/>
       </Unit11>
       <Unit12>
-        <Filename Value="hb_glycosylation.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\hb_glycosylation.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Hb_glycosylation"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="66"/>
       </Unit12>
       <Unit13>
-        <Filename Value="mmc.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\mmc.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="MMC"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="66"/>
       </Unit13>
       <Unit14>
-        <Filename Value="model_parameter_invoer.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\model_parameter_invoer.pas"/>
         <UnitName Value="Model_Parameter_Invoer"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="34"/>
@@ -109,15 +109,15 @@
         <UsageCount Value="10"/>
       </Unit14>
       <Unit15>
-        <Filename Value="diet_from_file.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\diet_from_file.pas"/>
         <EditorIndex Value="3"/>
         <TopLine Value="20"/>
         <CursorPos Y="42"/>
-        <UsageCount Value="22"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit15>
       <Unit16>
-        <Filename Value="model_parameters.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\model_parameters.pas"/>
         <UnitName Value="Model_Parameters"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="361"/>
@@ -125,103 +125,31 @@
         <UsageCount Value="8"/>
       </Unit16>
       <Unit17>
-        <Filename Value="gastric_motility.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\gastric_motility.pas"/>
         <EditorIndex Value="2"/>
         <TopLine Value="126"/>
         <CursorPos Y="141"/>
-        <UsageCount Value="19"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit17>
     </Units>
-    <JumpHistory Count="22" HistoryIndex="21">
+    <JumpHistory Count="4" HistoryIndex="3">
       <Position1>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="7" Column="85"/>
+        <Filename Value="..\DigSimBolus\DigSim\gastric_motility.pas"/>
+        <Caret Line="165" Column="76" TopLine="164"/>
       </Position1>
       <Position2>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="654" Column="119" TopLine="631"/>
+        <Filename Value="..\DigSimBolus\DigSim\compartment_properties.pas"/>
+        <Caret Line="54" TopLine="49"/>
       </Position2>
       <Position3>
         <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="502" Column="35" TopLine="496"/>
+        <Caret Line="520" Column="16" TopLine="506"/>
       </Position3>
       <Position4>
         <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="655" Column="13" TopLine="644"/>
+        <Caret Line="515" Column="9" TopLine="500"/>
       </Position4>
-      <Position5>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="653" Column="4" TopLine="643"/>
-      </Position5>
-      <Position6>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="655" Column="2" TopLine="642"/>
-      </Position6>
-      <Position7>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="525" Column="2" TopLine="509"/>
-      </Position7>
-      <Position8>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="677" Column="246" TopLine="654"/>
-      </Position8>
-      <Position9>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="528" TopLine="517"/>
-      </Position9>
-      <Position10>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="662" Column="218" TopLine="647"/>
-      </Position10>
-      <Position11>
-        <Filename Value="gastric_motility.pas"/>
-        <Caret Line="165" Column="76" TopLine="164"/>
-      </Position11>
-      <Position12>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="662" Column="218"/>
-      </Position12>
-      <Position13>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="1359" Column="151" TopLine="1338"/>
-      </Position13>
-      <Position14>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="523" Column="18" TopLine="502"/>
-      </Position14>
-      <Position15>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="656" Column="210" TopLine="643"/>
-      </Position15>
-      <Position16>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="667" Column="145" TopLine="643"/>
-      </Position16>
-      <Position17>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="515" Column="14" TopLine="498"/>
-      </Position17>
-      <Position18>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="516" Column="15" TopLine="508"/>
-      </Position18>
-      <Position19>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="515" Column="18" TopLine="504"/>
-      </Position19>
-      <Position20>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="1370" Column="68" TopLine="1354"/>
-      </Position20>
-      <Position21>
-        <Filename Value="digsim_v76_wasserstrasse_4.pas"/>
-        <Caret Line="515" Column="13" TopLine="515"/>
-      </Position21>
-      <Position22>
-        <Filename Value="compartment_properties.pas"/>
-        <Caret Line="54" TopLine="49"/>
-      </Position22>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

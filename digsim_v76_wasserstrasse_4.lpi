@@ -34,65 +34,65 @@
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="gastric_acid_secretion.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\gastric_acid_secretion.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit1>
       <Unit2>
-        <Filename Value="globalvariables.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\globalvariables.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit2>
       <Unit3>
-        <Filename Value="calc_mucin_hydrogen.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\calc_mucin_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_Mucin_hydrogen"/>
       </Unit3>
       <Unit4>
-        <Filename Value="calc_casein_hydrogen.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\calc_casein_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_Casein_hydrogen"/>
       </Unit4>
       <Unit5>
-        <Filename Value="calc_bsa_hydrogen.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\calc_bsa_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_BSA_hydrogen"/>
       </Unit5>
       <Unit6>
-        <Filename Value="calc_glg_hydrogen.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\calc_glg_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_GLG_hydrogen"/>
       </Unit6>
       <Unit7>
-        <Filename Value="liver_clearance.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\liver_clearance.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Liver_clearance"/>
       </Unit7>
       <Unit8>
-        <Filename Value="calc_protein_hydrogen.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\calc_protein_hydrogen.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="calc_Protein_hydrogen"/>
       </Unit8>
       <Unit9>
-        <Filename Value="brush_border_enzymes.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\brush_border_enzymes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Brush_border_enzymes"/>
       </Unit9>
       <Unit10>
-        <Filename Value="gastic_motility.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\gastic_motility.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Gastric_motility"/>
       </Unit10>
       <Unit11>
-        <Filename Value="compartment_properties.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\compartment_properties.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Compartment_properties"/>
       </Unit11>
       <Unit12>
-        <Filename Value="hb_glycosylation.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\hb_glycosylation.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Hb_glycosylation"/>
       </Unit12>
       <Unit13>
-        <Filename Value="mmc.pas"/>
+        <Filename Value="..\DigSimBolus\DigSim\mmc.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="MMC"/>
       </Unit13>
