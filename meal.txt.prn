@@ -1,0 +1,80 @@
+Inlezen maaltijden
+reference time (minutes after midnight correspon(min)        500
+
+time    compound          amount                dish    eating speed
+(min)   (number)          (g)                   (number)(ml/min)
+     0.0                15                    20       1      50
+     1.0                 1                   250       1      50
+
+
+    9999
+
+compound number           (number)                     1       2       3       4       5       6               7       8       9      10      11      12      13      14      15      16    9999
+Compound quantifiers                            water   glucose sucrose milk chomilk chogastic mgastic milk chocemulsie arabinosRapid stSlow staresistanextrudedbiscuit BLG     Bcasein
+pH                        (-)                          7       7       7       7       7       7               7       7       7       7       7       7       7       7       7       7
+solid                     particlesize (mm)            0       1       1       1       1       0               0       0       1       2       1       1       1       1       1       1
+viscosity                 (mPa.s)                      1       1       1       1       1    1000            1000       1       1    1000       1       1   10000   10000       1       1
+oral decomposition time   (min)                      0.1     0.1     0.1       1       1       5               5       1     0.1      10      50       1      10      20     0.1     0.1
+                          decomposes into (compo       0       0       0       6       7       0               0       0       0       0       0       0      10      11       0       0
+                          (%)                          0       0       0      95      95       0               0       0       0       0       0       0      50     100       0       0
+                          and (compound)               0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+                          (%)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+gastric decomposition time(min)                      0.1     0.1     0.1       5       5      50              50       1     0.1      10      50       1      10     100     0.1     0.1
+                          decomposes into (compo       0       0       0       6       7       0               0       0       0       0       0       0      10      11       0       0
+                          (%)                          0       0       0     100     100       0               0       0       0       0       0       0      50     100       0       0
+                          and (compound)               0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+                          (%)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+intestinal decomposition t(min)                      0.1     0.1     0.1       1       1       1               1       1     0.1       2      10       1      10     100     0.1     0.1
+                          decomposes into (compo       0       0       0       6       7       0               0       0       0       0       0       0      10      11       0       0
+                          (%)                          0       0       0     100     100       0               0       0       0       0       0       0      50     100       0       0
+                          and (compound)               0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+                          (%)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+
+
+        Ingredient
+       1water             (g)                        100       0       0       0       0   36.94           36.94      50       0       0       0       0      14      14       0       0
+       2fat               (g)                          0       0       0   32.73   32.73   29.13           29.13      50       0       0       0       0       0       0       0       0
+       3glucose           (g)                          0      99       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+       4protein           (g)                          0       0       0    1.08    1.08    1.08            1.08       0       0       0       0       0       0       0       0       0
+       5pharm             (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+       6pharm inactive    (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      10RDS               (g)                          0       0       0       0       0       0               0       0       0      99       0       0      75       0       0       0
+      11SDS               (g)                          0       0       0       0       0       0               0       0       0       0      99       0       0      75       0       0
+      12RS                (g)                          0       0       0       6       6    1.78            1.78       0       0       0       0      99       0       0       0       0
+      20FA                (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      21sucrose           (g)                          0       0      98    40.5    28.7      19              14       0       0       0       0       0       9       9       0       0
+      22fructose          (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      23maltose           (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      2413C maltose       (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      25arabinose         (g)                          0       0       0       0    11.9       0               5       0     100       0       0       0       0       0       0       0
+      26xylose            (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      27acarbose          (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      3413C glucose       (g)                          0       1       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      352H glucose        (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      3613C sucrose       (g)                          0       0       2       1       1       1               1       0       0       0       0       0       0       0       0       0
+      40pepsin            (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      41pancreatic proteas(g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      50lipase            (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      51bile salts        (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      52bile phospholipids(g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      53bile lysophospholi(g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      54bile salt LCFA com(g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      55mucus protein     (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      56pancreatic fosfoli(g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      57salivary_amylase  (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      58pancreatic_amylase(g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      60CCK releasing prot(g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      61casein            (g)                          0       0       0       9       9    2.31            2.31       0       0       0       0       0       0       0       0     100
+      62caseinpep         (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      63caseinpan         (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      64small peptides    (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      65casein peptides   (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      66BSA               (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      67BLG               (g)                          0       0       0      10      10    8.59            8.59       0       0       0       0       0       0       0     100       0
+      70Leu               (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      71Leutrac           (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      78NaCl              (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      79HCO3-             (g)                          0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+      80H+ ions           (mol)                        0       0       0       0       0       0               0       0       0       0       0       0       0       0       0       0
+       0                                             100     100     100  100.31  100.41   99.83           99.83     100     100      99      99      99      98      98     100     100
+        density           (g/ml)                       1    1.44    1.44     1.3     1.3     1.2             1.2    0.95    1.44    1.44    1.44    1.44     1.4     1.4     1.4     1.4
