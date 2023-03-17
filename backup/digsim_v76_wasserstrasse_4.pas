@@ -652,20 +652,21 @@ begin
         74 = I_nc     non competitive alpha amylase inhibitor}
     {including acompetitive inhibition of alpha amylases by glucose and maltose according to Vrsalovic Presecki "Mathematical modeling of amylase catalyzed starch hydrolysis."}
    liquid[i,57]:= liquid[i,57] -dt*liquid[i,57]*exp(5*ln(5/(5+pH[i])));    {degradation of salivary amylase at low pH}
-   change := AU*liquid[i,10]*salivary_amylase_susceptibility_HDstarch*liquid[i,57]*dt/(((K_ms*(1+concentration_lumen[i,72]/K_cs) +concentration_lumen[i,10]*(1+concentration_lumen[i,73]/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035)*(1+concentration_lumen[i,74]/K_ncs))));
-          change := change + 1*AU*liquid[i,10]*pancreatic_amylase_susceptibility_HDstarch*liquid[i,58]*dt/(((K_mp*(1+concentration_lumen[i,72]/K_cp )+concentration_lumen[i,10]*(1+(concentration_lumen[i,73]/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp ))));
+
+   change := 1000*AU*liquid[i,10]*salivary_amylase_susceptibility_HDstarch*liquid[i,57]*dt/(Volume[i]*((K_ms*(1+concentration_lumen[i,72]/K_cs) +concentration_lumen[i,10]*(1+concentration_lumen[i,73]/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035)*(1+concentration_lumen[i,74]/K_ncs))));
+          change := change + 1000*AU*liquid[i,10]*pancreatic_amylase_susceptibility_HDstarch*liquid[i,58]*dt/(Volume[i]*((K_mp*(1+concentration_lumen[i,72]/K_cp )+concentration_lumen[i,10]*(1+(concentration_lumen[i,73]/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp ))));
         if change> liquid[i,10] then change:= liquid[i,10];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
           liquid[i,10] := liquid[i,10] - change;
-   change := AU*liquid[i,11]*salivary_amylase_susceptibility_SDstarch*liquid[i,57]*dt/(((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));
-          change := change + 1*AU*liquid[i,11]*pancreatic_amylase_susceptibility_SDstarch*liquid[i,58]*dt/(((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));
+   change := AU*liquid[i,11]*salivary_amylase_susceptibility_SDstarch*liquid[i,57]*dt/(Volume[i]*((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));
+          change := change + 1*AU*liquid[i,11]*pancreatic_amylase_susceptibility_SDstarch*liquid[i,58]*dt/(Volume[i]*((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));
           if change> liquid[i,11] then change:= liquid[i,11];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
           liquid[i,11] := liquid[i,11] - change;
-   change := AU*liquid[i,12]*salivary_amylase_susceptibility_Rstarch*liquid[i,57]*dt/(((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));  {0.001 is Km in g/ml}
-          change := change + 1*AU*liquid[i,12]*pancreatic_amylase_susceptibility_Rstarch*liquid[i,58]*dt/(((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));  {0.001 is Km in g/ml}
+   change := AU*liquid[i,12]*salivary_amylase_susceptibility_Rstarch*liquid[i,57]*dt/(Volume[i]*((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));  {0.001 is Km in g/ml}
+          change := change + 1*AU*liquid[i,12]*pancreatic_amylase_susceptibility_Rstarch*liquid[i,58]*dt/(Volume[i]*((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));  {0.001 is Km in g/ml}
           if change> liquid[i,12] then change:= liquid[i,12];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
@@ -1310,7 +1311,7 @@ begin
   write(out, ' MMC status, Ghrelin, Motilin, bile_secretion_rate (g/min), Pancreatic fluid secretion (g/min), gastric fluid secretion (g/min), saliva secretion (g/ml), ');
   write(out, ' secreted gastric fluid (g), secreted conjugated bile salt (g), secreted panceratic fluid (g), secreted_saliva (g), gall bladder volume (g), conjugated bile salt concentration in gall bladder (g/g), duodenal conjugated bile salt concentration (g/g), gal bladder emptying rate (g/min), secteted bile (g), blood bile salt pool (g), unconjugated bile salt in colon (g), conjugated bile salt in secreted_bile (g/g), secretin (a.u.), glucagon (a.u.), glycogen (g),');
   write(out, ' RC13/C12, total lingual lipase lipolysis rate (%/min), total gastric lipase lipolysis rate (%/min), total pancreatic lipase lipolysis rate (%/min),');
-  write(out, ' gastric emptying water, gastric emptying pharmaceutical, amylase Units duodenum 2');
+  write(out, ' gastric emptying water, gastric emptying pharmaceutical, amylase Units mouth, amylase Units duodenum 2');
   writeln(out);
 
 
@@ -1366,7 +1367,7 @@ begin
                 conjugated_bile_salt_concentration_in_gall_bladder:7:5,', ', duodenal_conjugated_bile_salt_concentration:7:5,', ', gall_bladder_emptying_rate:7:5,', ', total_bile_secreted:7:5,
                 ', ', blood_bile_salt_pool:7:5,', ', liquid[16,59]:7:5,', ', conjugated_Bile_salt_in_secreted_bile:7:5,', ', secretin:7:5,', ', serum_glucagon:7:5,', ');
                 write(out, glycogene_store:7:5,', ', R_C13_C12:7:5,', ', total_linguallipaselipolysis_rate:7:5,', ',total_gastriclipaselipolysis_rate:7:5,', ', total_pancreaticlipaselipolysis_rate:7:5,', ');
-                write(out, gastric_emptying_water:7:5,', ', gastric_emptying_pharmaceutical:7:5,', ', liquid[6,58],', ');
+                write(out, gastric_emptying_water:7:5,', ', gastric_emptying_pharmaceutical:7:5,', ', liquid[2,57],', ', liquid[6,58],', ');
                 writeln(out);
                 teller:= 0;
             end;
