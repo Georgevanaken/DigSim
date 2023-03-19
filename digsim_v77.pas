@@ -240,13 +240,13 @@ end;
 
 Function time_of_day(minutes, referencetime: real):real;
  begin
-  time_of_day := {minutes+referencetime} 11*60; {this function is currently used for averaged unstimulated saliva secretion only at 11 am}
+  time_of_day := {minutes+referencetime} 11*60; {this function is currently used for averaged unstimulated saliva secretion only at 11 am; this is to avoid complexity in the interpretation}
  end;
 
 Procedure saliva_secretion;
 var  mucus_added, saliva_pH, hulp1, hulp2, hulp3, amylase_added, lingual_lipase_added :real;
 const mucus_content_in_saliva = 0.003; {about 0.3 % proteinn in saliva, Dawes 1972}
-const amylase_content_in_saliva = 2*75; {units/ml; 1 amylase unit = 1 mg maltose in 3 min, therefore 0.333 mg maltose /min}{according to Infogest protocol}
+const amylase_content_in_saliva = 150; {in units/ml saliva; 1 amylase unit = 1 mg maltose in 3 min, therefore 0.333 mg maltose /min}{according to Infogest protocol:  150 units α-amylase per mL of SSF (Bornhorst et al. 2014; Hoebler et al. 1998)}
       lingual_lipase_content_in_saliva = 0.01; {a guess}
 
 begin
@@ -257,11 +257,11 @@ begin
   saliva_addition:= (hulp1+ hulp2+ hulp3)*dt; {ml/min}       {Dawes 1972, Motoc 2003}
   liquid[2,1]:= liquid[2,1] + saliva_addition;
   mucus_added := mucus_content_in_saliva*saliva_addition;
-  amylase_added := amylase_content_in_saliva*saliva_addition;              {amylase content in units/ml}
+  amylase_added := amylase_content_in_saliva*saliva_addition;              {salivary amylase content in units/ml}
    {**** ability to secrete salivary amylase ***}amylase_added := 1*amylase_added;
   lingual_lipase_added := lingual_lipase_content_in_saliva*saliva_addition;  {lingual lipase content in saliva, units lipase in saliva still to be determined accurately}
   liquid[2,55] := liquid[2,55] + mucus_added  ;
-  liquid[2,57] := liquid[2,57] + amylase_added;            {amylase in units}
+  liquid[2,57] := liquid[2,57] + amylase_added;            {salivary amylase in units}
   liquid[2,48] := liquid[2,48]+ lingual_lipase_added; {lingual_lipase units not yet determinded}
   saliva_pH := 6;    {set value which is actually age and sex dependent, Motoc 2003}
   liquid[2,80] := liquid[2,80] + Mucin_hydrogen(saliva_pH, mucus_added ); {correction to Isolelectric point of mucus}
@@ -324,29 +324,29 @@ begin
 
   {pancreatic_secretion}                 {this part should be improved}
   richt_pH := 6;
+
   pancreatic_bicarbonate_secretion_rate := 1E-8*secretin;
-  pancreatic_enzyme_secretion_rate {in Units} := 10*0.5*(totalrateCCKrelease/(1+totalrateCCKrelease)+(Volume[5]+Volume[6])/(100+Volume[5]+Volume[6])); {guess: maximum at about 1.1 ml/minute}{stimulated by CCK production} {should amount to approximately 500 ml pancreatic fluid per day}
+  pancreatic_enzyme_secretion_rate {in Units as sum of all enzymes} := 10*0.5*(totalrateCCKrelease/(1+totalrateCCKrelease)+(Volume[5]+Volume[6])/(100+Volume[5]+Volume[6])); {guess: maximum at about 1.1 ml/minute}{stimulated by CCK production} {should amount to approximately 500 ml pancreatic fluid per day}
+  pancreatic_fluid_secretion_rate := 0.02 +  0.1{0.01}*pancreatic_enzyme_secretion_rate + 10*pancreatic_bicarbonate_secretion_rate;
 
   if MMC_status = 3 then  pancreatic_enzyme_secretion_rate := pancreatic_enzyme_secretion_rate + 1;
 
   liquid[6,80] := liquid[6,80]- pancreatic_bicarbonate_secretion_rate*dt; {removal H+ by bicarbonate}
   liquid[6,50] := liquid[6,50] + 0.1*pancreatic_enzyme_secretion_rate*dt; {pancreatic lipase}
-
   liquid[6,56] := liquid[6,56] + 0.1*pancreatic_enzyme_secretion_rate*dt; {pancreatische phospholipase}
-  liquid[6,58] := liquid[6,58] + 20*75*0.1*pancreatic_enzyme_secretion_rate*dt; {pancreatic amylase in units; By Infogest this was estimated to be equal to the value for saliva}
+  liquid[6,58] := liquid[6,58] + 150*pancreatic_enzyme_secretion_rate*dt; {pancreatic amylase in units; By Infogest should result in 200 U/mL in the small intestinal compartment, i.e., duodenum 2}
 
-  pancreatic_fluid_secretion_rate := 0.02 +  0.1{0.01}*pancreatic_enzyme_secretion_rate + 10*pancreatic_bicarbonate_secretion_rate;
   liquid[6,41] := liquid[6,41] + 1E-1*pancreatic_fluid_secretion_rate*dt; {guess: 10% pancreatic proteases in pancreatic fluid}
 
-
-  liquid[6,1] := liquid[6,1]+ 1*pancreatic_fluid_secretion_rate*dt; {water in pancreatic secrete added to duodenum}
   liquid[6,55] := liquid[6,55] + 0.01*pancreatic_fluid_secretion_rate*dt; {guess: 1% mucus protein in pancreatic fluid}
   liquid[6,60] := liquid[6,60]+ 1E-3*pancreatic_fluid_secretion_rate*dt ;{CCK signalling protein; it is guessed that is present at 0.1% in pancreatic fluid}
+  liquid[6,1] := liquid[6,1]+ 1*pancreatic_fluid_secretion_rate*dt; {water in pancreatic secrete added to duodenum, neglecting other compunds other than water}
+
   total_pancreatic_fluid_secretion:= total_pancreatic_fluid_secretion +pancreatic_fluid_secretion_rate*dt;
 
 end;
 
-Procedure intestinal_secretion;
+Procedure intestinal_secretion;    {this refers to secretion by the small intestinal mucosa}
 var intestinal_fluids_secretion: segment;
     richt_pH, bicarbonate_secretion, mucus_added,vertrager: real;
 
@@ -514,15 +514,15 @@ const pepsin_susceptibility_casein =0.01;
       salivary_amylase_susceptibility_Rstarch = 0.0;
       pancreatic_amylase_susceptibility_Rstarch = 0.0;
 
-      AU =  1000*3.333E-4;  {1 amylase unit = 1 mg maltose/3min, based on the Infogest protocol}      {still callibrating the starch digestion parameters}
-       K_ms = 5E-6 {g/ml}; {Estimated Michaelis Menten constant for salivary amylase}
-       K_cs = 5E-6 {g/ml}; {competitive inibitor constant for salivary amylase}                        {50E-6 g/ml is the IC50 value for the competitive inhibitor acarbose}
-       K_as = 5E-6 {g/ml}; {acompetitive inibitor constant for salivary amylase}
-       K_ncs = 5E-6 {g/ml};{noncompetitive inibitor constant for salivary amylase}
-       K_mp = 5E-6 {g/ml}; {Michaelis Menten constant for pancreatic amylase}
-       K_cp = 5E-6 {g/ml}; {competitive inibitor constant for pancreatic amylase}
-       K_ap = 5E-6 {g/ml}; {acompetitive inibitor constant for pancreatic amylase}
-       K_ncp = 5E-6 {g/ml};{noncompetitive inibitor constant for pancreatic amylase}
+
+       K_ms = 50E-6 {g/ml}; {Estimated Michaelis Menten constant for salivary amylase}
+       K_cs = 50E-6 {g/ml}; {competitive inibitor constant for salivary amylase}                        {50E-6 g/ml is the IC50 value for the competitive inhibitor acarbose}
+       K_as = 50E-6 {g/ml}; {acompetitive inibitor constant for salivary amylase}
+       K_ncs = 50E-6 {g/ml};{noncompetitive inibitor constant for salivary amylase}
+       K_mp = 50E-6 {g/ml}; {Michaelis Menten constant for pancreatic amylase}
+       K_cp = 50E-6 {g/ml}; {competitive inibitor constant for pancreatic amylase}
+       K_ap = 50E-6 {g/ml}; {acompetitive inibitor constant for pancreatic amylase}
+       K_ncp = 50E-6 {g/ml};{noncompetitive inibitor constant for pancreatic amylase}
 
 begin
   total_linguallipaselipolysis_rate :=0;
@@ -647,20 +647,20 @@ begin
             73 = I_a      acompetitive alpha amylase inhibitor
             74 = I_nc     non competitive alpha amylase inhibitor}
    liquid[i,57]:= liquid[i,57] -dt*liquid[i,57]*exp(5*ln(5/(5+pH[i])));    {degradation of salivary amylase at low pH}
-   change := AU*liquid[i,10]*salivary_amylase_susceptibility_HDstarch*liquid[i,57]*dt/(((K_ms*(1+concentration_lumen[i,72]/K_cs) +concentration_lumen[i,10]*(1+concentration_lumen[i,73]/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035)*(1+concentration_lumen[i,74]/K_ncs))));
-          change := change + 20*AU*liquid[i,10]*pancreatic_amylase_susceptibility_HDstarch*liquid[i,58]*dt/(((K_mp*(1+concentration_lumen[i,72]/K_cp )+concentration_lumen[i,10]*(1+(concentration_lumen[i,73]/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp ))));
+   change := liquid[i,10]*salivary_amylase_susceptibility_HDstarch*liquid[i,57]*dt/(Volume[i]*((K_ms*(1+concentration_lumen[i,72]/K_cs) +concentration_lumen[i,10]*(1+concentration_lumen[i,73]/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035)*(1+concentration_lumen[i,74]/K_ncs))));
+          change := change + liquid[i,10]*pancreatic_amylase_susceptibility_HDstarch*liquid[i,58]*dt/(Volume[i]*((K_mp*(1+concentration_lumen[i,72]/K_cp )+concentration_lumen[i,10]*(1+(concentration_lumen[i,73]/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp ))));
         if change> liquid[i,10] then change:= liquid[i,10];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
           liquid[i,10] := liquid[i,10] - change;
-   change := AU*liquid[i,11]*salivary_amylase_susceptibility_SDstarch*liquid[i,57]*dt/(((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));
-          change := change + 20*AU*liquid[i,11]*pancreatic_amylase_susceptibility_SDstarch*liquid[i,58]*dt/(((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));
+   change := liquid[i,11]*salivary_amylase_susceptibility_SDstarch*liquid[i,57]*dt/(Volume[i]*((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));
+          change := change + liquid[i,11]*pancreatic_amylase_susceptibility_SDstarch*liquid[i,58]*dt/(Volume[i]*((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));
           if change> liquid[i,11] then change:= liquid[i,11];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
           liquid[i,11] := liquid[i,11] - change;
-   change := AU*liquid[i,12]*salivary_amylase_susceptibility_Rstarch*liquid[i,57]*dt/(((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));  {0.001 is Km in g/ml}
-          change := change + 20*AU*liquid[i,12]*pancreatic_amylase_susceptibility_Rstarch*liquid[i,58]*dt/(((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));  {0.001 is Km in g/ml}
+   change := liquid[i,12]*salivary_amylase_susceptibility_Rstarch*liquid[i,57]*dt/(Volume[i]*((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));  {0.001 is Km in g/ml}
+          change := change + liquid[i,12]*pancreatic_amylase_susceptibility_Rstarch*liquid[i,58]*dt/(Volume[i]*((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));  {0.001 is Km in g/ml}
           if change> liquid[i,12] then change:= liquid[i,12];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
@@ -1304,7 +1304,8 @@ begin
   write(out, ' MMC status, Ghrelin, Motilin, bile_secretion_rate (g/min), Pancreatic fluid secretion (g/min), gastric fluid secretion (g/min), saliva secretion (g/ml), ');
   write(out, ' secreted gastric fluid (g), secreted conjugated bile salt (g), secreted panceratic fluid (g), secreted_saliva (g), gall bladder volume (g), conjugated bile salt concentration in gall bladder (g/g), duodenal conjugated bile salt concentration (g/g), gal bladder emptying rate (g/min), secteted bile (g), blood bile salt pool (g), unconjugated bile salt in colon (g), conjugated bile salt in secreted_bile (g/g), secretin (a.u.), glucagon (a.u.), glycogen (g),');
   write(out, ' RC13/C12, total lingual lipase lipolysis rate (%/min), total gastric lipase lipolysis rate (%/min), total pancreatic lipase lipolysis rate (%/min),');
-  write(out, ' gastric emptying water, gastric emptying pharmaceutical, Units salivary amylkase in mouth, Units pancreatic amylase in duodenum');
+  write(out, ' gastric emptying water, gastric emptying pharmaceutical, ');
+  write(out, ' Units salivary amylase in mouth, Units pancreatic amylase in duodenum, Units pancreatic amylase at start of ileum, Units/ml salivary amylase in mouth, Units/ml pancreatic amylase in duodenum, Units/ml pancreatic amylase at start of ileum');
   writeln(out);
 
 
@@ -1360,7 +1361,8 @@ begin
                 conjugated_bile_salt_concentration_in_gall_bladder:7:5,', ', duodenal_conjugated_bile_salt_concentration:7:5,', ', gall_bladder_emptying_rate:7:5,', ', total_bile_secreted:7:5,
                 ', ', blood_bile_salt_pool:7:5,', ', liquid[16,59]:7:5,', ', conjugated_Bile_salt_in_secreted_bile:7:5,', ', secretin:7:5,', ', serum_glucagon:7:5,', ');
                 write(out, glycogene_store:7:5,', ', R_C13_C12:7:5,', ', total_linguallipaselipolysis_rate:7:5,', ',total_gastriclipaselipolysis_rate:7:5,', ', total_pancreaticlipaselipolysis_rate:7:5,', ');
-                write(out, gastric_emptying_water:7:5,', ', gastric_emptying_pharmaceutical:7:5,', ', liquid[2,57],', ', liquid[6,58],', ');
+                write(out, gastric_emptying_water:7:5,', ', gastric_emptying_pharmaceutical:7:5,', ');
+                write(out, liquid[2,57],', ', liquid[6,58],', ', liquid[10,58],', ', liquid[2,57]/Volume[2],', ',liquid[6,58]/Volume[6],', ', liquid[10,58]/Volume[10],', ');
                 writeln(out);
                 teller:= 0;
             end;
