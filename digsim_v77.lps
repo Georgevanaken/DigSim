@@ -8,7 +8,8 @@
       <Unit0>
         <Filename Value="digsim_v77.pas"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="1342"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="1289"/>
         <CursorPos X="130" Y="1363"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
@@ -106,9 +107,8 @@
       </Unit15>
       <Unit16>
         <Filename Value="diet_from_file.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="29"/>
+        <TopLine Value="44"/>
         <CursorPos Y="42"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
