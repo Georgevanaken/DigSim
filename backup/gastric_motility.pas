@@ -364,8 +364,8 @@ if 1=1 then    {on-off switch for this redistribution; this is the most basic de
         end;
       end;
 
-      {total_solids_corpus:= 0;
-      for j:= 1 to comp do total_solids_corpus := total_solids_corpus + solids_corpus[j];  }
+      solids_in_corpus:= 0;
+      for j:= 1 to comp do solids_in_corpus := solids_in_corpus + solids_corpus[j];
       {end 4a.}
 
   {4b. antrum solids caseine}

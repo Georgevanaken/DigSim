@@ -217,6 +217,7 @@ for i:= 1 to 16 do hypertrophy[i] := 1;         {hypertrophy measures the fracti
   density[65] := 1.2;
   density[66] := 1.2;
   density[67] := 1.2;
+  density[68] := 1.66;
   density[80] := 1E6;
 
  {Caloric values in cal/g}
@@ -342,7 +343,7 @@ for i:= 1 to 16 do hypertrophy[i] := 1;         {hypertrophy measures the fracti
  for i:= 5 to 16 do delta[i]:= 1*5E-2 ; {in cm; 500 micron thickness}  { I T JOHNSON AND JENNIFER M GEE, Effect of gel-forming gums on the intestinal unstirred layer and sugar transport in vitro, Gut, 1981, 22, 398-403}
   for j:= 1 to comp do D[j] := 1E-20; {no diffusion through mucous layer for all components}{diffusion coefficients by 37 degrees C in water}
       D[1] := 2.27E-5*60{0.10};  {water enters the mucous layer, in D in cm2min-1}
-      D[3] := 9.4E-6*60;  {glucose nters the mucous layer, D in cm2min-1}
+      D[3] := 9.4E-6*60;  {glucose enters the mucous layer, D in cm2min-1}
         D[34] := D[3];D[35]:=D[3];
       D[20] := 6E-6*60{0.05}; {fatty acids enter the mucous layer}
       D[21] := 7.056E-6*60{0.10};D[36] := D[21];   {sucrose enters the mucous layer, D in cm2m-1}

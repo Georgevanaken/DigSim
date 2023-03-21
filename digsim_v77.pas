@@ -85,6 +85,7 @@ uses crt, sysutils, gastric_acid_secretion, globalvariables, calc_Mucin_hydrogen
  65 = small peptides
  66 = BSA
  67 = BLG
+ 68 = citric_acid
 
  70 = Leucine
  71 = Leucine tracer
@@ -1257,7 +1258,7 @@ begin
            liquiddish[dishnumber,2] := 1; {fat}
            liquiddish[dishnumber,3] := 50; {glucose}
            liquiddish[dishnumber,4] := 10; {protein}
-           liquiddish[dishnumber,80]:= liquid[1,80]+ Ber_hydrogen(pH[1], liquid[1,61], liquid[1,66], liquid[1,65], liquid[1,67], liquid[1,4]);
+           liquiddish[dishnumber,80]:= liquid[1,80]+ Ber_hydrogen(pH[1], liquid[1,61], liquid[1,66], liquid[1,65], liquid[1,67], liquid[1,4], liquid[1,68]);
            eating_speed_dish[1]:= 50;
          while minutes < 0 do
          begin

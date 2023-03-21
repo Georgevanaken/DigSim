@@ -336,46 +336,46 @@ for i:= 1 to 16 do hypertrophy[i] := 1;         {hypertrophy measures the fracti
      end;
   for i := 5 to 15 do for j:= 1 to comp do  VmaxAbsorption[i,j]:=  VmaxAbsorption[i,j]*hypertrophy[i];
 
-  {voorfactor in de diffusie absorptie berekening die brush border concentratie koppeld aan afvoer door absorptie en aanvoer door diffusie uit lumen}
+  {prefactor in the diffusion absorption calcuation that couples the brush border concentration to an decrease through absorption and an increase by diffusion from the lumen}
 
 
- for i:= 5 to 16 do delta[i]:= 1*5E-2 ; {in cm; 500 micron dik}  { I T JOHNSON AND JENNIFER M GEE, Effect of gel-forming gums on the intestinal unstirred layer and sugar transport in vitro, Gut, 1981, 22, 398-403}
-  for j:= 1 to comp do D[j] := 1E-20; {geen diffusie voor alle componenten door de muceuse laag}{diffucie coefficienten by 37 graden C in water}
-      D[1] := 2.27E-5*60{0.10};  {water gaat de mucus laag in, in cm2min-1}
-      D[3] := 9.4E-6*60;  {glucose gaat de mucus laag in, in cm2min-1}
+ for i:= 5 to 16 do delta[i]:= 1*5E-2 ; {in cm; 500 micron thickness}  { I T JOHNSON AND JENNIFER M GEE, Effect of gel-forming gums on the intestinal unstirred layer and sugar transport in vitro, Gut, 1981, 22, 398-403}
+  for j:= 1 to comp do D[j] := 1E-20; {no diffusion through mucous layer for all components}{diffusion coefficients by 37 degrees C in water}
+      D[1] := 2.27E-5*60{0.10};  {water enters the mucous layer, in D in cm2min-1}
+      D[3] := 9.4E-6*60;  {glucose nters the mucous layer, D in cm2min-1}
         D[34] := D[3];D[35]:=D[3];
-      D[20] := 6E-6*60{0.05}; {vetzuren gaan de mucuslaag in}
-      D[21] := 7.056E-6*60{0.10};D[36] := D[21];   {sucrose gaat de mucus laag in, in cm2m-1}
-      D[22] := 10E-6*60{0.10};  {fructose gaat de mucus laag in}
-      D[23] := 4E-6*60{0.10};  {maltose gaat de mucus laag in}
-            D[24] := D[23];  {maltose gaat de mucus laag in}
-      D[25] := 10E-6*60{0.10};  {arabinose gaat de mucus laag in}
-      D[26] := 10E-6*60{0.10};  {xylose gaat de mucus laag in}
+      D[20] := 6E-6*60{0.05}; {fatty acids enter the mucous layer}
+      D[21] := 7.056E-6*60{0.10};D[36] := D[21];   {sucrose enters the mucous layer, D in cm2m-1}
+      D[22] := 10E-6*60{0.10};  {fructose enters the mucous layer}
+      D[23] := 4E-6*60{0.10};  {maltose enters the mucous layer}
+            D[24] := D[23];  {maltose enters the mucous layer}
+      D[25] := 10E-6*60{0.10};  {arabinose enters the mucous layer}
+      D[26] := 10E-6*60{0.10};  {xylose enters the mucous layer}
       D[27] := 10E-6*60{0.10};  {acarbose gaat de mucus laag in}
-      D[5] := 6E-6*60; {pharmaceutical}
+      D[5] := 6E-6*60; {pharmaceutical enters the mucous layer}
       {D[50] := 0.05E-5; } {lipase}
-      D[51] := 6E-6*60{0.05};  {bile salts}
+      D[51] := 6E-6*60{0.05};  {bile salts }
       D[52] := 4E-6*60{0.05};  {bile phospholipids}
       D[53] := 4E-6*60{00.05};  {bile lysophospholipids}
       D[54] := 4E-6*60{0.05};  {bile salt LCFA complex}
-      D[64] := 6.7E-6*60{0.05};   {casein kleine peptiden kunnen de mucus laag in}
-      D[65] := 6.7E-6*60{0.05};   {kleine peptiden kunnen de mucus laag in}
+      D[64] := 6.7E-6*60{0.05};   {casein small peptides enter the mucous layer}
+      D[65] := 6.7E-6*60{0.05};   {small peptides enters the mucous layer}
 
-      D[80] := 20E-5*60; {diffusie waterstof ionen gekoppeld aan een tegenion zoals chloride}
+      D[80] := 20E-5*60; {diffusion of hydrogen ins coupled to counter ions}
 
-      {for j := 1 to comp do D[j]:= 0.1*D[j]; }{optioneel effect van guar gom die de permeabiliteit van de muceuze laag verminderd}
+      {for j := 1 to comp do D[j]:= 0.1*D[j]; }{optional effect of polysaccharide thickeners reducing the permeability of the mucous layer}
 
 
 
   for i:= 5 to 15 do for j:= 1 to comp do
     begin
-    surface_factor[i] := 1/(3*100*100*hypertrophy[i]){2E-3};{de reden hiervoor is dat het oppervlak van de brush border door villi en microvilli sterk vergroot is en er roering optreedt door peristaltiek}
+    surface_factor[i] := 1/(3*100*100*hypertrophy[i]){2E-3};{the reason for this factor is that the surface of the brush border is greatly enhanced by villi and microvilli, whcih are both sirred by peristaltic motion}
     {surface_factor[i] :=1/9000; {nieuwe schatting}  }
     T[i,j]:= delta[i]/D[j];
     end;
   For i:= 1 to 4 do Maxtotalabsorption_rate[i]:= 0;
-  For i:= 5 to 9 do Maxtotalabsorption_rate[i]:= 1{*hypertrophy[i]};        {1; typische waarden in mini Troll pigs volgens Weber en Ehrlein 1998}
-  For i:= 10 to 15 do Maxtotalabsorption_rate[i]:= 0.5{*hypertrophy[i]};       {1; typische waarden in mini Troll pigs volgens Weber en Ehrlein 1998}
+  For i:= 5 to 9 do Maxtotalabsorption_rate[i]:= 1{*hypertrophy[i]};        {1; typical values in mini Troll pigs according to Weber en Ehrlein 1998}
+  For i:= 10 to 15 do Maxtotalabsorption_rate[i]:= 0.5{*hypertrophy[i]};       {1; typical values in mini Troll pigs according to Weber en Ehrlein 1998}
 
   maxcaloricabsorptioncapacity := 0;
   for i:= 1 to 15 do maxcaloricabsorptioncapacity := maxcaloricabsorptioncapacity + Maxtotalabsorption_rate[i];

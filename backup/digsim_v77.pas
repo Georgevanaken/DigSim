@@ -85,6 +85,7 @@ uses crt, sysutils, gastric_acid_secretion, globalvariables, calc_Mucin_hydrogen
  65 = small peptides
  66 = BSA
  67 = BLG
+ 68 = citric_acid
 
  70 = Leucine
  71 = Leucine tracer
@@ -334,7 +335,7 @@ begin
   liquid[6,80] := liquid[6,80]- pancreatic_bicarbonate_secretion_rate*dt; {removal H+ by bicarbonate}
   liquid[6,50] := liquid[6,50] + 0.1*pancreatic_enzyme_secretion_rate*dt; {pancreatic lipase}
   liquid[6,56] := liquid[6,56] + 0.1*pancreatic_enzyme_secretion_rate*dt; {pancreatische phospholipase}
-  liquid[6,58] := liquid[6,58] + {20*75*}0.1*pancreatic_enzyme_secretion_rate*dt; {pancreatic amylase in units; By Infogest should result in 200 U/mL in the small intestinal compartment, i.e., duodenum 2}
+  liquid[6,58] := liquid[6,58] + 150*pancreatic_enzyme_secretion_rate*dt; {pancreatic amylase in units; By Infogest should result in 200 U/mL in the small intestinal compartment, i.e., duodenum 2}
 
   liquid[6,41] := liquid[6,41] + 1E-1*pancreatic_fluid_secretion_rate*dt; {guess: 10% pancreatic proteases in pancreatic fluid}
 

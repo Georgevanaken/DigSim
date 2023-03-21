@@ -314,7 +314,7 @@ if 1=1 then    {on-off switch for this redistribution; this is the most basic de
       vloksamenstelling[61] := 1;          {vloksamenstelling bepaald welke componenten bij de uitvlokking betrokken zijn; nu caseine}
       vloksamenstelling[62] := 1;
       hulp := vloksamenstelling[61] +vloksamenstelling[62];
-      vloksamenstelling[80] := 1*Ber_hydrogen(pHvlokken,hulp ,vloksamenstelling[55],vloksamenstelling[66],vloksamenstelling[67], vloksamenstelling[4]);
+      vloksamenstelling[80] := 1*Ber_hydrogen(pHvlokken,hulp ,vloksamenstelling[55],vloksamenstelling[66],vloksamenstelling[67], vloksamenstelling[4], vloksamenstelling[68]);
     {4a. corpus solids}
       vlokkingssnelheid_corpus := 0;
       Kineticfactor := 3000{3E3};
