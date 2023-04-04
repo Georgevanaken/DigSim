@@ -125,8 +125,8 @@
         <Filename Value="diet_from_file.pas"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="13"/>
-        <TopLine Value="145"/>
-        <CursorPos Y="157"/>
+        <TopLine Value="29"/>
+        <CursorPos Y="42"/>
         <UsageCount Value="28"/>
         <Loaded Value="True"/>
       </Unit16>
@@ -168,7 +168,7 @@
         <Loaded Value="True"/>
       </Unit21>
     </Units>
-    <JumpHistory Count="17" HistoryIndex="16">
+    <JumpHistory Count="18" HistoryIndex="17">
       <Position1>
         <Filename Value="digsim_v77.pas"/>
         <Caret Line="1181" Column="37" TopLine="1174"/>
@@ -237,6 +237,10 @@
         <Filename Value="digsim_v77.pas"/>
         <Caret Line="1085" Column="14" TopLine="1022"/>
       </Position17>
+      <Position18>
+        <Filename Value="diet_from_file.pas"/>
+        <Caret Line="157" TopLine="145"/>
+      </Position18>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
