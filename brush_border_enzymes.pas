@@ -90,7 +90,7 @@ begin
      {acompetitive inhibition}
      Ia[i] :=1*(1+concentration_brush[i,26]/2E-5); {acompetitive inhibitie door arabinose en xylose}{Michaelis Menten equation for sucrose hydrolysis by sucrase} {Ki arbinose  = 6.85E-4 g/ml; Ki acarbose = 7.1E-7 g/ml volgens Seri et al 1996}
      {competitive inhibition}
-     Ic[i] :=1+concentration_brush[i,27]/1E-6;   {competitive inhibitie door acarbose}
+     Ic[i] :=1+concentration_brush[i,27]/7E-7;   {competitive inhibitie door acarbose}
 
   for i:= 1 to 15 do maltase_presence[i]:= sucrase_presence[i];             {* hier wordt de verdeling van maltase over de dunne darm beschreven} {de verdeling gaat samen met die van sucrase}
 

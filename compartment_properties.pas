@@ -47,7 +47,7 @@ begin
        for j:= 1 to comp do
         begin
         volume[i] := volume[i] + liquid[i,j]/density[j];
-        {for s:= 1 to smax do Volume[i] := volume[i] + solids[s,i,j]/density[j];}
+        for s:= 1 to smax do Volume[i] := volume[i] + solids[s,i,j]/density[j]; {}
         end;
        for compoundnumber:= 1 to number_of_compounds do
         begin

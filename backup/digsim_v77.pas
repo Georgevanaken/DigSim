@@ -247,7 +247,7 @@ Function time_of_day(minutes, referencetime: real):real;
 Procedure saliva_secretion;
 var  mucus_added, saliva_pH, hulp1, hulp2, hulp3, amylase_added, lingual_lipase_added :real;
 const mucus_content_in_saliva = 0.003; {about 0.3 % proteinn in saliva, Dawes 1972}
-const amylase_content_in_saliva = 150; {in units/ml saliva; 1 amylase unit = 1 mg maltose in 3 min, therefore 0.333 mg maltose /min}{according to Infogest protocol:  150 units α-amylase per mL of SSF (Bornhorst et al. 2014; Hoebler et al. 1998)}
+const amylase_content_in_saliva = 0.05; {in units/ml saliva; 1 amylase unit = 1 mg maltose in 3 min, therefore 0.333 mg maltose /min}{according to Infogest protocol:  150 units α-amylase per mL of SSF (Bornhorst et al. 2014; Hoebler et al. 1998)}
       lingual_lipase_content_in_saliva = 0.01; {a guess}
 
 begin
@@ -335,7 +335,7 @@ begin
   liquid[6,80] := liquid[6,80]- pancreatic_bicarbonate_secretion_rate*dt; {removal H+ by bicarbonate}
   liquid[6,50] := liquid[6,50] + 0.1*pancreatic_enzyme_secretion_rate*dt; {pancreatic lipase}
   liquid[6,56] := liquid[6,56] + 0.1*pancreatic_enzyme_secretion_rate*dt; {pancreatische phospholipase}
-  liquid[6,58] := liquid[6,58] + 150*pancreatic_enzyme_secretion_rate*dt; {pancreatic amylase in units; By Infogest should result in 200 U/mL in the small intestinal compartment, i.e., duodenum 2}
+  liquid[6,58] := liquid[6,58] + 0.5{150}*pancreatic_enzyme_secretion_rate*dt; {pancreatic amylase in units; By Infogest should result in 200 U/mL in the small intestinal compartment, i.e., duodenum 2}
 
   liquid[6,41] := liquid[6,41] + 1E-1*pancreatic_fluid_secretion_rate*dt; {guess: 10% pancreatic proteases in pancreatic fluid}
 
@@ -355,7 +355,7 @@ begin
  {secretion in the first part of the duodenum: Brunner glands}
            vertrager := 0;
            richt_pH := 7;
-           bicarbonate_secretion := dt*(vertrager*bicarbonate_secretion+5E-6*secretin)/(vertrager+1); {stimulated by secretin}
+           bicarbonate_secretion := dt*(vertrager*bicarbonate_secretion+5E-5{6}*secretin)/(vertrager+1); {stimulated by secretin}
            liquid[5,80] := liquid[5,80]-bicarbonate_secretion;
            liquid[5,1] := liquid[5,1]+1000*bicarbonate_secretion+0.01*dt;   {1M bicarbonaat in water?}
   {****}          mucus_added:= 10*bicarbonate_secretion;   {1% mucus in Brunner gland secrete?}
@@ -516,11 +516,11 @@ const pepsin_susceptibility_casein =0.01;
       pancreatic_amylase_susceptibility_Rstarch = 0.0;
 
 
-       K_ms = 50E-6 {g/ml}; {Estimated Michaelis Menten constant for salivary amylase}
+       K_ms = 0.001{50E-6} {g/ml}; {Estimated Michaelis Menten constant for salivary amylase}
        K_cs = 50E-6 {g/ml}; {competitive inibitor constant for salivary amylase}                        {50E-6 g/ml is the IC50 value for the competitive inhibitor acarbose}
        K_as = 50E-6 {g/ml}; {acompetitive inibitor constant for salivary amylase}
        K_ncs = 50E-6 {g/ml};{noncompetitive inibitor constant for salivary amylase}
-       K_mp = 50E-6 {g/ml}; {Michaelis Menten constant for pancreatic amylase}
+       K_mp = 50E-6 {g/ml}; {Estimated Michaelis Menten constant for pancreatic amylase}
        K_cp = 50E-6 {g/ml}; {competitive inibitor constant for pancreatic amylase}
        K_ap = 50E-6 {g/ml}; {acompetitive inibitor constant for pancreatic amylase}
        K_ncp = 50E-6 {g/ml};{noncompetitive inibitor constant for pancreatic amylase}
@@ -529,60 +529,76 @@ begin
   total_linguallipaselipolysis_rate :=0;
   total_gastriclipaselipolysis_rate :=0;
   total_pancreaticlipaselipolysis_rate := 0;
+  percentual_loss_of_triglycerides_lingual  := 0 ;
+  percentual_loss_of_triglycerides_gastric  := 0 ;
+  percentual_loss_of_triglycerides_pancreatic  := 0 ;
   for i:= 2 to 15 do         {lumen of mouth, stomach and small intestine}
   begin
 
    {fat digestion}
    change := LinguallipolysisCST*liquid[i,48]*liquid[i,2]*dt/SQR(Volume[i]);   {48 = lingual lipase}  {1 TG is hydrolysed into 1 diglyceride + 1 FA}
+   if change > liquid[i,2] then change := liquid[i,2];
    {if minutes> 0 then begin write(i, liquid[i,2], change); readln; end; }
           liquid[i,7] := liquid[i,7]+ 0.666666*change;                {7 = diglyceride }
           liquid[i,20] := liquid[i,20] + 0.333333*change;            {20 = fatty acid}
           liquid[i,2]  := liquid[i,2]-change;                        {2 = triglyceride}
-        if liquid[i,2] > 1E-10 then linguallipolysis_rate[i] := 100*change/liquid[i,2];
+        linguallipolysis_rate[i] := change;      {loss of triglycerides in g/min}
+        if liquid[i,2] > 1E-10 then percentual_loss_of_triglycerides_lingual := percentual_loss_of_triglycerides_Lingual + 100*change/liquid[i,2];      {percentual loss of triglycerides in g/min}
+
         total_linguallipaselipolysis_rate := total_linguallipaselipolysis_rate + linguallipolysis_rate[i] ;
 
    change := LinguallipolysisCST*liquid[i,48]*liquid[i,7]*dt/SQR(Volume[i]);   {50 = pancreatic lipase}   {1 Diglyceride is hydrolysed into 1 monoglyceride + 1 FA}
-   change := 0;
+   if change > liquid[i,7] then change := liquid[i,7];
           liquid[i,20] := liquid[i,20]+ 0.5*change;                                   {8 = monoglyceride}
           liquid[i,8] := liquid[i,8] +0.5*change;
           liquid[i,7]  := liquid[i,7]-change;
 
    change := LinguallipolysisCST*liquid[i,48]*liquid[i,8]*dt/SQR(Volume[i]);      {50 = pancreatic lipase}   {1 monoglyceride is hydrolysed into 1 FA; glycerol negelcted }
-   change := 0;
+   if change > liquid[i,8] then change := liquid[i,8];
           liquid[i,20] := liquid[i,20]+ change;                                   {8 = monoglyceride}
           liquid[i,7]  := liquid[i,8]-change;
 
    change := GastriclipolysisCST*liquid[i,49]*liquid[i,2]*dt/SQR(Volume[i]);   {49 = gastric lipase}  {1 TG  is hydrolysed into 1 diglyceride + 1 FA}
+   if change > liquid[i,2] then change := liquid[i,2];
           liquid[i,7] := liquid[i,7]+ 0.666666*change;                {7 = diglyceride }
           liquid[i,20] := liquid[i,20] + 0.333333*change;            {20 = fatty acid}
           liquid[i,2]  := liquid[i,2]-change;                        {2 = triglyceride}
-        if liquid[i,2] > 1E-10 then gastriclipolysis_rate[i] := 100*change/liquid[i,2];
+        gastriclipolysis_rate[i] := change;  {loss of triglycerides in g/min}
+        if liquid[i,2] > 1E-10 then percentual_loss_of_triglycerides_gastric := percentual_loss_of_triglycerides_gastric + 100*change/liquid[i,2];  {percentual loss of triglycerides in g/min}
         total_gastriclipaselipolysis_rate := total_gastriclipaselipolysis_rate + gastriclipolysis_rate[i] ;
 
    change := PancreaticlipolysisCST*liquid[i,50]*liquid[i,2]*dt/SQR(Volume[i]);      {50 = pancreatic lipase}   {1 TG is hydrolysed into 1 diglyceride  + 1 FA}
+   if change > liquid[i,2] then change := liquid[i,2];
           liquid[i,7] := liquid[i,7] +0.666666*change;
           liquid[i,20] := liquid[i,20]+ 0.333333*change;
           liquid[i,2]  := liquid[i,2]-change;
-        if liquid[i,2]> 1E-10 then pancreaticlipolysis_rate[i] := 100*change/liquid[i,2];
+        pancreaticlipolysis_rate[i] := change; {loss of triglycerides in g/min}
+        if liquid[i,2]> 1E-10 then percentual_loss_of_triglycerides_pancreatic := percentual_loss_of_triglycerides_pancreatic + 100*change/liquid[i,2]; {percentual loss of triglycerides in g/min}
         total_pancreaticlipaselipolysis_rate := total_pancreaticlipaselipolysis_rate + pancreaticlipolysis_rate[i];
 
    change := PancreaticlipolysisCST*liquid[i,50]*liquid[i,7]*dt/SQR(Volume[i]);      {50 = pancreatic lipase}   {1 Diglyceride is hydrolysed into 1 monoglyceride + 1 FA}
+   if change > liquid[i,7] then change := liquid[i,7];
           liquid[i,20] := liquid[i,20]+ 0.5*change;                                   {8 = monoglyceride}
           liquid[i,8] := liquid[i,8] +0.5*change;
           liquid[i,7]  := liquid[i,7]-change;
 
-   change := 10000*liquid[i,20]*liquid[i,51]/(0.1+liquid[i,51])*dt/SQR(Volume[i]);        {formation of bile micelles with fatty acids}
+   change := 100{10000}*liquid[i,20]*liquid[i,51]/(0.1+liquid[i,51])*dt/SQR(Volume[i]);        {formation of bile micelles with fatty acids}
+   if change > liquid[i,20] then change := liquid[i,20];
+   if change > liquid[i,51] then change := liquid[i,51];
           liquid[i,54] := liquid[i,54] + change;
           liquid[i,20] := liquid[i,20]- change;
           liquid[i,51] := liquid[i,51]- change;
 
-   change := 10000*liquid[i,8]*liquid[i,51]/(0.1+liquid[i,51])*dt/SQR(Volume[i]);        {formation of bile micellen with monoglycerides}
+   change := 100{10000}*liquid[i,8]*liquid[i,51]/(0.1+liquid[i,51])*dt/SQR(Volume[i]);        {formation of bile micellen with monoglycerides}
+   if change > liquid[i,8] then change := liquid[i,20];
+   if change > liquid[i,51] then change := liquid[i,51];
           liquid[i,54] := liquid[i,54] + change;
           liquid[i,8] := liquid[i,8]- change;
           liquid[i,51] := liquid[i,51]- change;
 
    {phospholipid digestion}
    change := 0.1*liquid[i,52]*liquid[i,56]*dt/SQR(Volume[i]);
+   if change > liquid[i,52] then change := liquid[i,52];
           liquid[i, 52] := liquid[i,52]- change;   {digestion gal fosfolipiden}
           liquid[i,53] := liquid[i,53] + change; {lysofosfolipiden by hydrolysis of bile fospfolipids}
           liquid[i,20] := liquid[i,20] + change; {FA formed by hydrolysis of bile fosfolipids}
@@ -590,48 +606,51 @@ begin
    {protein digestion} {4 = protein,  61 = casein, 62 = caseinpep, 63 = caseinpan, 64 = caseinpeptides, 65 = small peptides}
    segmentpH := pH[i];
    change := liquid[i,4]*pepsin_susceptibility_protein*pepsin_units(segmentpH,liquid[i,40])*dt/(volume[i]);
+   if change > liquid[i,4] then change := liquid[i,4];
           liquid[i,65] := liquid[i,65] + change; {digestion protein by pepsin into small peptides}
           liquid[i,4] := liquid[i,4] - change;
 
    change := liquid[i,66]*pepsin_susceptibility_protein*pepsin_units(segmentpH,liquid[i,40])*dt/(volume[i]);
+   if change > liquid[i,66] then change := liquid[i,66];
           liquid[i,65] := liquid[i,65] + change; {digestion BSA by pepsin into small peptides}
           liquid[i,66] := liquid[i,66] - change;
 
    change := liquid[i,67]*pepsin_susceptibility_protein*pepsin_units(segmentpH,liquid[i,40])*dt/(volume[i]);
+   if change > liquid[i,67] then change := liquid[i,67];
           liquid[i,65] := liquid[i,65] + change; {digestion BLG by pepsin into small protein peptides}
           liquid[i,67] := liquid[i,67] - change;
 
    change := liquid[i,61]*pepsin_susceptibility_casein*pepsin_units(segmentpH,liquid[i,40])*dt/(volume[i]);
-          if change > liquid [i,61] then change := 0;
+   if change > liquid[i,61] then change := liquid[i,61];
           liquid[i,62] := liquid[i,62] + change; {digestion Casein by pepsin into casein peptides}
           liquid[i,61] := liquid[i,61] - change;
 
    change:= liquid[i,4]*liquid[i,41]*pancreatic_protease_susceptibility_protein*activity_pancreatic_protease*dt/Volume[i];
-            if change > liquid [i,4] then change := 0;
+   if change > liquid[i,4] then change := liquid[i,4];
             liquid[i,65] := liquid[i,65] + change; {digestion protein by pancreatic protease into small peptides}
             liquid[i,4] := liquid[i,4] - change;
 
    change:= liquid[i,66]*liquid[i,41]*pancreatic_protease_susceptibility_protein*activity_pancreatic_protease*dt/Volume[i];
-            if change > liquid [i,66] then change := 0;
+   if change > liquid [i,66] then change := liquid[i,64];
             liquid[i,65] := liquid[i,65] + change; {digestion BSA by pancreatic protease into small protein peptides}
             liquid[i,66] := liquid[i,66] - change;
 
    change:= liquid[i,67]*liquid[i,41]*pancreatic_protease_susceptibility_protein*activity_pancreatic_protease*dt/Volume[i];
-            if change > liquid [i,67] then change := 0;
+   if change > liquid [i,67] then change := liquid[i,64];
             liquid[i,65] := liquid[i,65] + change; {digestion BLG by pancreatic protease into small proteien peptides}
             liquid[i,67] := liquid[i,67] - change;
 
    change:= liquid[i,61]*liquid[i,41]*pancreatic_protease_susceptibility_casein*activity_pancreatic_protease*dt/Volume[i];
-            if change > liquid [i,61] then change := 0;
+   if change > liquid [i,61] then change := liquid[i,61];
             liquid[i,63] := liquid[i,63] + change; {digestion Casein by pancreatic protease into pancreatic casein digest}
             liquid[i,61] := liquid[i,61] - change;
 
    change := liquid[i,62]*pepsin_susceptibility_casein_fragments*pepsin_units(segmentpH,liquid[i,40])*dt/volume[i];
-          if change > liquid [i,62] then change := 0;
+   if change > liquid [i,62] then change := liquid[i,62];
           liquid[i,64] := liquid[i,64] + change;  {digestion Casein pepsic digest by pepsin into casein small peptides}
           liquid[i,62] := liquid[i,62] - change;
    change := liquid[i,63]*liquid[i,41]*pancreatic_protease_susceptibility_casein_fragments*activity_pancreatic_protease*dt/Volume[i];
-          if change > liquid [i,63] then change := 0;
+   if change > liquid [i,63] then change := liquid[i,63];
           liquid[i,64] := liquid[i,64] + change;  {digestion Casein pancreatic digest by pancreatic protease into casein small peptides}
           liquid[i,63] := liquid[i,63] - change;
 
@@ -648,26 +667,29 @@ begin
             73 = I_a      acompetitive alpha amylase inhibitor
             74 = I_nc     non competitive alpha amylase inhibitor}
    liquid[i,57]:= liquid[i,57] -dt*liquid[i,57]*exp(5*ln(5/(5+pH[i])));    {degradation of salivary amylase at low pH}
-   change := liquid[i,10]*salivary_amylase_susceptibility_HDstarch*liquid[i,57]*dt/(Volume[i]*((K_ms*(1+concentration_lumen[i,72]/K_cs) +concentration_lumen[i,10]*(1+concentration_lumen[i,73]/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035)*(1+concentration_lumen[i,74]/K_ncs))));
-          change := change + liquid[i,10]*pancreatic_amylase_susceptibility_HDstarch*liquid[i,58]*dt/(Volume[i]*((K_mp*(1+concentration_lumen[i,72]/K_cp )+concentration_lumen[i,10]*(1+(concentration_lumen[i,73]/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp ))));
+
+   salivary_amylase_activity[i] :=   liquid[i,57]/(((Volume[i]*K_ms*(1+concentration_lumen[i,72]/K_cs)+liquid[i,10]*(1+concentration_lumen[i,73]/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035))*(1+concentration_lumen[i,74]/K_ncs)));  {activity in active Units}
+   pancreatic_amylase_activity[i] := liquid[i,58]/(((Volume[i]*K_mp*(1+concentration_lumen[i,72]/K_cp)+liquid[i,10]*(1+concentration_lumen[i,73]/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp))); {activity in active units}
+   change :=                 liquid[i,10]*salivary_amylase_susceptibility_HDstarch*salivary_amylase_activity[i]*dt;
+          change := change + liquid[i,10]*pancreatic_amylase_susceptibility_HDstarch*pancreatic_amylase_activity[i]*dt;
         if change> liquid[i,10] then change:= liquid[i,10];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
           liquid[i,10] := liquid[i,10] - change;
-   change := liquid[i,11]*salivary_amylase_susceptibility_SDstarch*liquid[i,57]*dt/(Volume[i]*((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));
-          change := change + liquid[i,11]*pancreatic_amylase_susceptibility_SDstarch*liquid[i,58]*dt/(Volume[i]*((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,11]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));
+   change :=                 liquid[i,11]*salivary_amylase_susceptibility_SDstarch*salivary_amylase_activity[i]*dt;
+          change := change + liquid[i,11]*pancreatic_amylase_susceptibility_SDstarch*pancreatic_amylase_activity[i]*dt;
           if change> liquid[i,11] then change:= liquid[i,11];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
           liquid[i,11] := liquid[i,11] - change;
-   change := liquid[i,12]*salivary_amylase_susceptibility_Rstarch*liquid[i,57]*dt/(Volume[i]*((K_ms*(1+(concentration_lumen[i,72])/K_cs )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_as+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncs )));  {0.001 is Km in g/ml}
-          change := change + liquid[i,12]*pancreatic_amylase_susceptibility_Rstarch*liquid[i,58]*dt/(Volume[i]*((K_mp*(1+(concentration_lumen[i,72])/K_cp )+concentration_lumen[i,12]*(1+(concentration_lumen[i,73])/K_ap+concentration_lumen[i,3]/0.1+concentration_lumen[i,23]/0.035 ))*(1+concentration_lumen[i,74]/K_ncp )));  {0.001 is Km in g/ml}
+   change :=                 liquid[i,12]*salivary_amylase_susceptibility_Rstarch*salivary_amylase_activity[i]*dt;
+          change := change + liquid[i,12]*pancreatic_amylase_susceptibility_Rstarch*pancreatic_amylase_activity[i]*dt;
           if change> liquid[i,12] then change:= liquid[i,12];
           liquid[i,23] := liquid[i,23] + 0.99*change;   {maltose is released from starch digestion by amylases}
           liquid[i,24] := liquid[i,24] + 0.01*change;   {13C maltose}
           liquid[i,12] := liquid[i,12] - change;
-   {Volumina;}
   end;
+  Volumina;
 end;
 
 
@@ -947,7 +969,7 @@ var delay, change,hulp, hulp1, delay_entry:real;
           {coupling s between gut hormones}
              rateCCKproduction[i] := rateCCKproduction[i]*(1-0.2*(PYY/(1+PYY))); {Gomez 2013: PYY lowers CCK production}
              rateGIPproduction[i] := rateGIPproduction[i] ;   {neural coupling with GLP1 does not exist, see Little 2006}
-             ratePYYproduction[i] := ratePYYproduction[i] +1*totalrateCCKrelease;    {neural coupling with CCK}
+             ratePYYproduction[i] := ratePYYproduction[i] +0{1}*totalrateCCKrelease;    {neural coupling with CCK}
              rateGLP1production[i] := rateGLP1production[i] + 0*rateGIPproduction[i];  {neural coupling with GIP probably does not really exist in humans, and instead occurs through a different mechanism (Lim 2006)}
 
           {mesentric cells are a cell layer in the small intestines that are responsible for gut hormone accumulation and release. This needs to be checked}
@@ -1258,7 +1280,7 @@ begin
            liquiddish[dishnumber,2] := 1; {fat}
            liquiddish[dishnumber,3] := 50; {glucose}
            liquiddish[dishnumber,4] := 10; {protein}
-           liquiddish[dishnumber,80]:= liquid[1,80]+ Ber_hydrogen(pH[1], liquid[1,61], liquid[1,66], liquid[1,65], liquid[1,67], liquid[1,4]);
+           liquiddish[dishnumber,80]:= liquid[1,80]+ Ber_hydrogen(pH[1], liquid[1,61], liquid[1,66], liquid[1,65], liquid[1,67], liquid[1,4], liquid[1,68]);
            eating_speed_dish[1]:= 50;
          while minutes < 0 do
          begin
@@ -1302,11 +1324,11 @@ begin
   write(out, ' sucrase_inhibitie[15], absorption_rate[15-3], absorption_rate[15-1], osmotic_value_brush_proximal, osmotic_value_brush_distal, osmotic_value_lumen_duodenum, osmotic_value_lumen_distal,');
   write(out, ' serum_glucose_mg_dl, serum_insulin_mU_l, GLP1gastricemptying_stress, Viscousgastricemptying_stress,');
   write(out, ' 13C serum_glucose (mMol/l), 2H serum_glucose (mMol/l), glucose RaE (Mol/min), up[4], intercellulaire glucose muscle adipose (mMol/l), intercellulaire glucose skin (mMol/l), total_glucose_absorption_rate (Mol/min), Gastric Volume (mL), HbA1C (%), Leucine absorbed (g), total SI water absorption rate (g/min),');
-  write(out, ' MMC status, Ghrelin, Motilin, bile_secretion_rate (g/min), Pancreatic fluid secretion (g/min), gastric fluid secretion (g/min), saliva secretion (g/ml), ');
+  write(out, ' MMC status, Ghrelin, Motilin, bile_secretion_rate (g/min), Pancreatic fluid secretion (g/min), gastric fluid secretion (g/min), saliva secretion (g/min), ');
   write(out, ' secreted gastric fluid (g), secreted conjugated bile salt (g), secreted panceratic fluid (g), secreted_saliva (g), gall bladder volume (g), conjugated bile salt concentration in gall bladder (g/g), duodenal conjugated bile salt concentration (g/g), gal bladder emptying rate (g/min), secteted bile (g), blood bile salt pool (g), unconjugated bile salt in colon (g), conjugated bile salt in secreted_bile (g/g), secretin (a.u.), glucagon (a.u.), glycogen (g),');
   write(out, ' RC13/C12, total lingual lipase lipolysis rate (%/min), total gastric lipase lipolysis rate (%/min), total pancreatic lipase lipolysis rate (%/min),');
   write(out, ' gastric emptying water, gastric emptying pharmaceutical, ');
-  write(out, ' Units salivary amylase in mouth, Units pancreatic amylase in duodenum, Units pancreatic amylase at start of ileum, Units/ml salivary amylase in mouth, Units/ml pancreatic amylase in duodenum, Units/ml pancreatic amylase at start of ileum');
+  write(out, ' Active units salivary amylase in mouth, Active units pancreatic amylase in duodenum, Active units pancreatic amylase at start of ileum, Active units/ml salivary amylase in mouth, Active units/ml pancreatic amylase in duodenum, Active units/ml pancreatic amylase at start of ileum, Percentual_loss_of_triglycerides_lingual, Percentual_loss_of_triglycerides_gastric, Percentual_loss_of_triglycerides_pancreatic');
   writeln(out);
 
 
@@ -1363,7 +1385,7 @@ begin
                 ', ', blood_bile_salt_pool:7:5,', ', liquid[16,59]:7:5,', ', conjugated_Bile_salt_in_secreted_bile:7:5,', ', secretin:7:5,', ', serum_glucagon:7:5,', ');
                 write(out, glycogene_store:7:5,', ', R_C13_C12:7:5,', ', total_linguallipaselipolysis_rate:7:5,', ',total_gastriclipaselipolysis_rate:7:5,', ', total_pancreaticlipaselipolysis_rate:7:5,', ');
                 write(out, gastric_emptying_water:7:5,', ', gastric_emptying_pharmaceutical:7:5,', ');
-                write(out, liquid[2,57],', ', liquid[6,58],', ', liquid[10,58],', ', liquid[2,57]/Volume[2],', ',liquid[6,58]/Volume[6],', ', liquid[10,58]/Volume[10],', ');
+                write(out, salivary_amylase_activity[2],', ', pancreatic_amylase_activity[6],', ', pancreatic_amylase_activity[10],', ', salivary_amylase_activity[2]/Volume[2],', ',pancreatic_amylase_activity[6]/Volume[6],', ', pancreatic_amylase_activity[10]/Volume[10],', ', percentual_loss_of_triglycerides_lingual,', ', percentual_loss_of_triglycerides_gastric,', ', percentual_loss_of_triglycerides_pancreatic,', ');
                 writeln(out);
                 teller:= 0;
             end;

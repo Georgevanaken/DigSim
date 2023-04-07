@@ -165,7 +165,7 @@ else
       OsmoticgastricEmptying_stress := osmcont*osmotic_value_brush_duodenum/isotonic; {osmotic effect}
                                 if MMC_Status = 2 then OsmoticgastricEmptying_stress := 0.5*OsmoticgastricEmptying_stress; {situation during MMC phase 2}
                                 if MMC_Status = 3 then OsmoticgastricEmptying_stress := 0*OsmoticgastricEmptying_stress; {situation during MMC phase 3}
-      pHgastricEmptying_stress := 1*(abs(6-pH[5])/6);     {pH effect}  {prefactor 20}
+      pHgastricEmptying_stress := 20*(abs(6-pH[5])/6);     {pH effect}  {prefactor 20}
                                 if MMC_Status = 2 then pHgastricEmptying_stress := 0.5*pHgastricEmptying_stress; {situation during MMC phase 2}
                                 if MMC_Status = 3 then pHgastricEmptying_stress := 0*pHgastricEmptying_stress; {situation during MMC phase 3}
       GLP1gastricemptying_stress := 10*GLP1;    {400 gives the same geeft inhibition at constant glucose dosage as described by Brener and Mc Hugh, Regulation of gastric emptying of glucose, gastroenterology 1983}
@@ -314,7 +314,7 @@ if 1=1 then    {on-off switch for this redistribution; this is the most basic de
       vloksamenstelling[61] := 1;          {vloksamenstelling bepaald welke componenten bij de uitvlokking betrokken zijn; nu caseine}
       vloksamenstelling[62] := 1;
       hulp := vloksamenstelling[61] +vloksamenstelling[62];
-      vloksamenstelling[80] := 1*Ber_hydrogen(pHvlokken,hulp ,vloksamenstelling[55],vloksamenstelling[66],vloksamenstelling[67], vloksamenstelling[4]);
+      vloksamenstelling[80] := 1*Ber_hydrogen(pHvlokken,hulp ,vloksamenstelling[55],vloksamenstelling[66],vloksamenstelling[67], vloksamenstelling[4], vloksamenstelling[68]);
     {4a. corpus solids}
       vlokkingssnelheid_corpus := 0;
       Kineticfactor := 3000{3E3};

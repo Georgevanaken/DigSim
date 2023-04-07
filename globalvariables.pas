@@ -33,7 +33,7 @@ var     liquid, liquidnext, liquiddish, liquiddishnext, compound, compounddish, 
                           Motilinenterocytes, Secretinenterocytes, Maxtotalabsorption_rate, caloric_density_local, caloric_density_mucus, volume_mucus, osmotic_value_brush,
                           osmotic_value_lumen, delta, pH,
                           liquidviscosityplate, hydrogen, surface_factor, sucrase_inhibitie, Maltase_inhibitie, Ia, Ic, glucose_absorption_rate,Mesentric_CCK, Mesentric_PYY,
-                          Mesentric_GIP, Mesentric_GLP1, Mesentric_Ghrelin, Mesentric_Motilin, Mesentric_Secretin, eating_speed_dish , hypertrophy: segment;
+                          Mesentric_GIP, Mesentric_GLP1, Mesentric_Ghrelin, Mesentric_Motilin, Mesentric_Secretin, eating_speed_dish , hypertrophy, salivary_amylase_activity, pancreatic_amylase_activity : segment;
         dt, BasisGastricEmptyingRate, BasisSITransitRate, CCKEffectOnGastricEmptying, CCKgastricEmptying, OsmoticgastricEmptying, pHgastricEmptying, GLP1gastricemptying_stress,
                           ViscousgastricEmptying,fundus_viscosity, corpus_viscosity, antral_viscosity, Gastric_tone, segmentpH, volume_mucus_layer, bicarbonate_secretion, HbA1c,
                           HbA1c_halflife, Glycosylation_rate_constant : real;
@@ -54,7 +54,7 @@ var     liquid, liquidnext, liquiddish, liquiddishnext, compound, compounddish, 
         D, caloric_value, density, CCKresponsefactor, PYYresponsefactor, GIPresponsefactor, GLP1responsefactor, Ghrelinresponsefactor, Motilinresponsefactor, Secretinresponsefactor,
                           proteolytic_susceptibility, absorbed, vloksamenstelling, solids_corpus, solids_antrum, solids_fundus, samenstelling_syneresevloeistof,
                           totalabsorption_rate, bloodserumconc, inverse_serumhalftime, fundus, gall_bladder, Blood, calories_compound, gastric_sieve, solid, concentration_fundus : component;
-        realGLP1, RealGIP,prefactor, totalwaterabsorptionrate, gastric_emptying_water, gastric_emptying_pharmaceutical : real;
+        realGLP1, RealGIP,prefactor, totalwaterabsorptionrate, gastric_emptying_water, gastric_emptying_pharmaceutical, percentual_loss_of_triglycerides_lingual, percentual_loss_of_triglycerides_gastric, percentual_loss_of_triglycerides_pancreatic  : real;
         MMC_status : integer;
         MMC_time : MMC_timer;
         YY,MM,DD, YYE, MME, DDE: word;

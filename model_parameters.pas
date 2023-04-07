@@ -37,7 +37,7 @@ for i:= 1 to 16 do hypertrophy[i] := 1;         {hypertrophy measures the fracti
 
   end;
  CCKresponsefactor[20] := 2000{20};	{20 fatty acids in min-1 CCKunit-1}
- CCKresponsefactor[54] := 2000{20};	{54 bile salt LCFA complex}
+ CCKresponsefactor[54] := 2000{2000}{20};	{54 bile salt LCFA complex}
  CCKresponsefactor[64] := 200{20};	{64 caseinpeptides}
  CCKresponsefactor[65] := 100{20};	{65 small peptides}
 
@@ -187,9 +187,9 @@ for i:= 1 to 16 do hypertrophy[i] := 1;         {hypertrophy measures the fracti
  MotilinattenuationSI := 2{2};
  SecretinattenuationSI := 0.5;        {guess value, unsure if secretin slows SI transit}
 
- LinguallipolysisCST := 1500{ 100}*0.012 {0.012 min-1};  {* estimated value: about 1.2 % per minute (in the fed state accordimg to Frederique Carriere)}
- GastriclipolysisCST := 0 { 100}*0.012 {0.012 min-1};  {* estimated value: about 1.2 % per minute (in the fed state accordimg to Frederique Carriere}
- PancreaticlipolysisCST := 5000{100}*0.012 {0.012 min-1};  {* geschatte waarde: 0ngeveer 1.2 % per minuut (fed state Carriere)}
+ LinguallipolysisCST := 0;  {no ligual lipase}
+ GastriclipolysisCST := 6;  {gastric + pancreatic lipolysis should lead to about 1.2 % per minute in the fed state accordimg to Frederique Carriere}
+ PancreaticlipolysisCST := 6 ;  {see above}
 
  {densities}
  for j := 1 to comp do density[j]:=1E20;   {the volumes of the enzymes are neglected by taking an extremely high value}
