@@ -748,7 +748,7 @@ begin
 end;
 
 Procedure absorption_in_Small_Intestine;
-var totaltargetabsorption_rate, delay, change: real;
+var totaltargetabsorption_rate, delay, change, Mestentric_transfomation_of_fructose_to_glucose: real;
     const R=0.8; {recovery fraction of glucose after absorption by enterocytes; part is used to fuel the enterocytes}
 
    begin
@@ -843,10 +843,11 @@ var totaltargetabsorption_rate, delay, change: real;
               if change > Mesentric[i,j] then change :=  Mesentric[i,j] ;
            Blood[j] := Blood[j] + change;
            Mesentric[i,j]:= Mesentric[i,j]-change;
-           if j=3 then G0in := G0in+ delay*Mesentric[i,3]*1000; {glucose absorption rescaled to mg/min}
+           Mestentric_transfomation_of_fructose_to_glucose :=  0.5*Mesentric[i,22]; {according to  Jang, C. et al. The small intestine converts dietary fructose into glucose and organic acids. Cell Metab. 27, 351–361 (2018)fructose is largely converted into glucose in the enterocytes}
+           if j=3 then G0in := G0in+ delay*Mesentric[i,3]*1000+ Mestentric_transfomation_of_fructose_to_glucose*1000; {glucose absorption rescaled to mg/min}
            if j=34 then G1in := G1in+delay*Mesentric[i,34]*1000;
            if j=35 then G2in := G2in+delay*Mesentric[i,35]*1000;
-           if j=22 then fruc := fruc + delay*Mesentric[i,22]*1000;       {total blood fructose in mg}
+           if j=22 then fruc := fruc + delay*Mesentric[i,22]*1000-Mestentric_transfomation_of_fructose_to_glucose*1000;       {total blood fructose in mg}
          end;
       end;
       G0in:= R*G0in; G1in:=R*G1in; G2in:= R*G2in; {R corrects for the usage of glucose by the absorptive enterocytes}
