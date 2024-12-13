@@ -1,7 +1,7 @@
 @echo off
-SET THEFILE=C:\Users\akegeo01\OneDrive - Royal Cosun\Documents\DigSim versie 1 April 2023\digsim_v77.exe
+SET THEFILE=C:\Users\akegeo01\OneDrive - Royal Cosun\Documents\GitHub\DigSim\Versie 77 with protein inhibitor\digsim_v77b.exe
 echo Linking %THEFILE%
-C:\lazarus\fpc\3.2.2\bin\x86_64-win64\ld.exe -b pei-x86-64  --gc-sections    --entry=_mainCRTStartup    -o "C:\Users\akegeo01\OneDrive - Royal Cosun\Documents\DigSim versie 1 April 2023\digsim_v77.exe" "C:\Users\akegeo01\OneDrive - Royal Cosun\Documents\DigSim versie 1 April 2023\link18980.res"
+C:\lazarus\fpc\3.2.2\bin\x86_64-win64\ld.exe -b pei-x86-64  --gc-sections    --entry=_mainCRTStartup    -o "C:\Users\akegeo01\OneDrive - Royal Cosun\Documents\GitHub\DigSim\Versie 77 with protein inhibitor\digsim_v77b.exe" "C:\Users\akegeo01\OneDrive - Royal Cosun\Documents\GitHub\DigSim\Versie 77 with protein inhibitor\link2948.res"
 if errorlevel 1 goto linkend
 goto end
 :asmend
