@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CONFIG>
-  <Compiler Value="C:\lazarus\fpc\3.2.2\bin\x86_64-win64\fpc.exe" Date="1420791944"/>
-  <Params Value=" -MObjFPC -Scghi -O1 -gw2 -godwarfsets -gl -l -vewnhibq &quot;-FuC:\Users\akegeo01\OneDrive - Royal Cosun\Documents\DigSim versie 1 April 2023\&quot; &quot;-FUC:\Users\akegeo01\OneDrive - Royal Cosun\Documents\DigSim versie 1 April 2023\lib\x86_64-win64\&quot; &quot;-FEC:\Users\akegeo01\OneDrive - Royal Cosun\Documents\DigSim versie 1 April 2023\&quot; &quot;-oC:\Users\akegeo01\OneDrive - Royal Cosun\Documents\DigSim versie 1 April 2023\digsim_v77.exe&quot; digsim_v77.pas"/>
+  <Compiler Value="C:\lazarus\fpc\3.2.2\bin\x86_64-win64\fpc.exe" Date="1420789896"/>
+  <Params Value=" -MObjFPC -Scghi -O1 -gw2 -godwarfsets -gl -l -vewnhibq &quot;-FuC:\Users\akegeo01\OneDrive - Royal Cosun\Documents\GitHub\DigSim\&quot; &quot;-FUC:\Users\akegeo01\OneDrive - Royal Cosun\Documents\GitHub\DigSim\lib\x86_64-win64\&quot; &quot;-FEC:\Users\akegeo01\OneDrive - Royal Cosun\Documents\GitHub\DigSim\&quot; &quot;-oC:\Users\akegeo01\OneDrive - Royal Cosun\Documents\GitHub\DigSim\digsim_v77.exe&quot; digsim_v77.pas"/>
 </CONFIG>
