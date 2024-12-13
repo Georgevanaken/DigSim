@@ -328,12 +328,12 @@ for i:= 1 to 16 do hypertrophy[i] := 1;         {hypertrophy measures the fracti
         VmaxAbsorption[7,j]:= 1{3}*VmaxAbsorption[7,j];
         VmaxAbsorption[8,j]:= 1{3}*VmaxAbsorption[8,j];
         VmaxAbsorption[9,j]:= 1{2}*VmaxAbsorption[9,j];
-        VmaxAbsorption[10,j]:= 0.5{1}*VmaxAbsorption[10,j];
-        VmaxAbsorption[11,j]:= 0.5{0.9}*VmaxAbsorption[11,j];
-        VmaxAbsorption[12,j]:= 0.5{0.8}*VmaxAbsorption[12,j];
-        VmaxAbsorption[13,j]:= 0.5{0.7}*VmaxAbsorption[13,j];
-        VmaxAbsorption[14,j]:= 0.5{0.6}*VmaxAbsorption[14,j];
-        VmaxAbsorption[15,j]:= 0.5{0.5}*VmaxAbsorption[15,j];
+        VmaxAbsorption[10,j]:= 0.51*VmaxAbsorption[10,j];
+        VmaxAbsorption[11,j]:= {0.2}0.9*VmaxAbsorption[11,j];
+        VmaxAbsorption[12,j]:={0.2}0.5{0.8}*VmaxAbsorption[12,j];
+        VmaxAbsorption[13,j]:={0.1}0.5{0.7}*VmaxAbsorption[13,j];
+        VmaxAbsorption[14,j]:={0.1}0.5{0.6}*VmaxAbsorption[14,j];
+        VmaxAbsorption[15,j]:={0.1}0.5{0.5}*VmaxAbsorption[15,j];
      end;
   for i := 5 to 15 do for j:= 1 to comp do  VmaxAbsorption[i,j]:=  VmaxAbsorption[i,j]*hypertrophy[i];
 
